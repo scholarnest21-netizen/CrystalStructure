@@ -1,0 +1,2006 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Crystal Structure & Defects | ScholarNest</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js"></script>
+<script>
+MathJax = {
+  tex: { inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['$$','$$'],['\\[','\\]']] },
+  options: { skipHtmlTags: ['script','noscript','style','textarea'] }
+};
+</script>
+<style>
+:root {
+  --ink: #0e0e12;
+  --paper: #f5f3ee;
+  --cream: #faf8f3;
+  --teal: #0d7377;
+  --teal-light: #14a085;
+  --teal-pale: #e0f4f3;
+  --gold: #c9871e;
+  --gold-pale: #fdf3e0;
+  --muted: #6b6b78;
+  --border: #d9d6ce;
+  --card: #ffffff;
+  --radius: 12px;
+  --shadow: 0 2px 16px rgba(14,14,18,0.08);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{
+  font-family:'Space Grotesk',sans-serif;
+  background:var(--paper);
+  color:var(--ink);
+  line-height:1.7;
+}
+
+/* ── NAV ── */
+nav{
+  position:sticky;top:0;z-index:100;
+  background:rgba(245,243,238,0.92);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+  padding:0 2rem;
+  display:flex;align-items:center;justify-content:space-between;
+  height:60px;
+}
+.nav-logo{
+  display:flex;align-items:center;gap:10px;
+  font-weight:700;font-size:1.1rem;letter-spacing:-0.02em;
+  color:var(--teal);text-decoration:none;
+}
+.nav-logo svg{flex-shrink:0}
+.nav-links{display:flex;gap:1.5rem;list-style:none}
+.nav-links a{
+  font-size:.85rem;font-weight:500;color:var(--muted);
+  text-decoration:none;transition:color .2s;
+}
+.nav-links a:hover{color:var(--teal)}
+
+/* ── HERO ── */
+.hero{
+  min-height:92vh;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;
+  padding:5rem 2rem 3rem;
+  background:
+    radial-gradient(ellipse 80% 50% at 50% 0%, rgba(13,115,119,.12) 0%, transparent 70%),
+    var(--paper);
+  position:relative;overflow:hidden;
+}
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background-image:
+    repeating-linear-gradient(0deg, transparent, transparent 39px, var(--border) 40px),
+    repeating-linear-gradient(90deg, transparent, transparent 39px, var(--border) 40px);
+  opacity:.25;
+}
+.hero-eyebrow{
+  font-size:.8rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--teal);background:var(--teal-pale);
+  border:1px solid rgba(13,115,119,.25);
+  padding:.3rem 1rem;border-radius:999px;
+  display:inline-block;margin-bottom:1.5rem;position:relative;
+}
+.hero h1{
+  font-family:'Lora',serif;font-size:clamp(2.4rem,6vw,5rem);
+  font-weight:600;line-height:1.12;letter-spacing:-.03em;
+  max-width:800px;position:relative;
+  background:linear-gradient(135deg,var(--ink) 40%,var(--teal));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+.hero-sub{
+  font-size:1.1rem;color:var(--muted);max-width:560px;margin:1.5rem auto 2.5rem;
+  position:relative;
+}
+.hero-atoms{position:absolute;inset:0;pointer-events:none}
+.hero-scroll{
+  display:flex;align-items:center;gap:.5rem;
+  font-size:.8rem;color:var(--muted);position:relative;margin-top:2rem;
+}
+.hero-scroll svg{animation:bounce 2s infinite}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}
+
+/* ── TOC ── */
+.toc{
+  max-width:960px;margin:0 auto 4rem;padding:0 2rem;
+}
+.toc-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1rem;
+  margin-top:1.5rem;
+}
+.toc-card{
+  background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+  padding:1rem 1.2rem;text-decoration:none;
+  display:flex;flex-direction:column;gap:.3rem;
+  transition:border-color .2s,box-shadow .2s,transform .2s;
+}
+.toc-card:hover{border-color:var(--teal);box-shadow:var(--shadow);transform:translateY(-2px)}
+.toc-num{font-size:.75rem;color:var(--teal);font-weight:600;letter-spacing:.06em;text-transform:uppercase}
+.toc-title{font-size:.9rem;font-weight:600;color:var(--ink)}
+
+/* ── SECTION ── */
+.section{max-width:960px;margin:0 auto;padding:0 2rem 5rem}
+.sec-header{margin-bottom:2.5rem;padding-bottom:1rem;border-bottom:2px solid var(--teal-pale)}
+.sec-label{
+  font-size:.75rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--teal);margin-bottom:.5rem;display:block;
+}
+.sec-header h2{
+  font-family:'Lora',serif;font-size:clamp(1.8rem,4vw,2.6rem);
+  font-weight:600;letter-spacing:-.02em;line-height:1.2;
+}
+.prose{font-size:1rem;color:#2a2a30;line-height:1.8;max-width:720px}
+.prose p{margin-bottom:1.2rem}
+.prose p:last-child{margin-bottom:0}
+.prose strong{color:var(--ink);font-weight:600}
+
+/* ── CARDS ── */
+.card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.5rem;margin:2rem 0}
+.card{
+  background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+  padding:1.5rem;box-shadow:var(--shadow);
+}
+.card h3{font-size:1rem;font-weight:700;color:var(--teal);margin-bottom:.7rem;display:flex;align-items:center;gap:.5rem}
+.card p,.card li{font-size:.9rem;color:#3a3a42;line-height:1.7}
+.card ul{padding-left:1.2rem}
+.card li{margin-bottom:.4rem}
+.card .icon{
+  width:36px;height:36px;background:var(--teal-pale);border-radius:8px;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1.1rem;
+}
+
+/* ── HIGHLIGHT BOX ── */
+.highlight{
+  background:var(--teal-pale);border-left:4px solid var(--teal);
+  border-radius:0 var(--radius) var(--radius) 0;
+  padding:1.2rem 1.5rem;margin:1.5rem 0;
+}
+.highlight.gold{background:var(--gold-pale);border-color:var(--gold)}
+.highlight h4{font-size:.9rem;font-weight:700;margin-bottom:.5rem;color:var(--teal)}
+.highlight.gold h4{color:var(--gold)}
+.highlight p,.highlight li{font-size:.9rem;line-height:1.7}
+
+/* ── MATH ── */
+.math-box{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:var(--radius);padding:1.5rem 2rem;margin:1.5rem 0;
+  overflow-x:auto;text-align:center;
+  box-shadow:var(--shadow);
+}
+.math-box.derivation{
+  background:#0e0e12;color:#e8e4dc;
+  border-color:#222;
+}
+.math-box.derivation .mjx-chtml{color:#e8e4dc}
+.math-label{
+  font-size:.75rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:.8rem;display:block;
+}
+.derivation .math-label{color:#888}
+.step{margin-bottom:1rem;padding-bottom:1rem;border-bottom:1px solid #333}
+.step:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+.step-note{font-size:.8rem;color:#aaa;margin-top:.4rem;font-style:italic}
+
+/* ── DIAGRAMS / SIMULATIONS ── */
+.diagram-wrap{
+  background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+  padding:1.5rem;margin:2rem 0;box-shadow:var(--shadow);
+  text-align:center;
+}
+.diagram-wrap figcaption{
+  font-size:.82rem;color:var(--muted);margin-top:1rem;font-style:italic;
+}
+canvas{display:block;margin:0 auto;border-radius:8px}
+.sim-controls{
+  display:flex;flex-wrap:wrap;gap:.8rem;justify-content:center;margin-top:1rem;
+}
+.btn{
+  background:var(--teal);color:#fff;border:none;border-radius:8px;
+  padding:.5rem 1.2rem;font-size:.85rem;font-family:'Space Grotesk',sans-serif;
+  font-weight:600;cursor:pointer;transition:background .2s,transform .15s;
+}
+.btn:hover{background:var(--teal-light);transform:translateY(-1px)}
+.btn.outline{background:transparent;color:var(--teal);border:1.5px solid var(--teal)}
+.btn.outline:hover{background:var(--teal-pale)}
+.btn.gold{background:var(--gold)}
+.btn.gold:hover{background:#b8760f}
+select,input[type=range]{
+  font-family:'Space Grotesk',sans-serif;font-size:.85rem;
+  padding:.4rem .8rem;border:1px solid var(--border);border-radius:8px;
+  background:var(--paper);color:var(--ink);cursor:pointer;
+}
+
+/* ── TABLE ── */
+table{width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:.88rem}
+th{background:var(--teal);color:#fff;padding:.8rem 1rem;text-align:left;font-weight:600}
+td{padding:.7rem 1rem;border-bottom:1px solid var(--border)}
+tr:nth-child(even) td{background:var(--cream)}
+
+/* ── ACCORDION ── */
+.accordion{border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin:1.5rem 0}
+.acc-item{border-bottom:1px solid var(--border)}
+.acc-item:last-child{border-bottom:none}
+.acc-header{
+  width:100%;background:var(--card);border:none;padding:1rem 1.5rem;
+  display:flex;justify-content:space-between;align-items:center;
+  font-family:'Space Grotesk',sans-serif;font-size:.95rem;font-weight:600;
+  color:var(--ink);cursor:pointer;text-align:left;transition:background .2s;
+}
+.acc-header:hover{background:var(--cream)}
+.acc-header.open{color:var(--teal);background:var(--teal-pale)}
+.acc-chevron{transition:transform .3s;color:var(--teal)}
+.acc-header.open .acc-chevron{transform:rotate(180deg)}
+.acc-body{
+  max-height:0;overflow:hidden;transition:max-height .4s ease;
+  background:var(--cream);padding:0 1.5rem;
+}
+.acc-body.open{padding:1.2rem 1.5rem;max-height:2000px}
+
+/* ── BADGE ── */
+.badge{
+  display:inline-block;font-size:.72rem;font-weight:700;
+  letter-spacing:.06em;text-transform:uppercase;
+  padding:.2rem .6rem;border-radius:4px;
+  background:var(--teal-pale);color:var(--teal);
+  margin-right:.4rem;
+}
+.badge.gold{background:var(--gold-pale);color:var(--gold)}
+
+/* ── DIVIDER ── */
+.divider{border:none;border-top:1px solid var(--border);margin:2rem 0}
+
+/* ── FOOTER ── */
+footer{
+  text-align:center;padding:3rem 2rem;
+  border-top:1px solid var(--border);
+  background:var(--cream);
+  font-size:.85rem;color:var(--muted);
+}
+footer strong{color:var(--teal)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:600px){
+  .nav-links{display:none}
+  .hero h1{font-size:2.2rem}
+  .section{padding:0 1.2rem 3rem}
+}
+/* ── CRYSTAL ANIMATION ── */
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes pulse{0%,100%{opacity:.6}50%{opacity:1}}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">
+    <!-- ScholarNest Logo SVG -->
+    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="32" height="32" rx="8" fill="#0d7377"/>
+      <path d="M7 22L16 10L25 22" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M10 18H22" stroke="white" stroke-width="2.2" stroke-linecap="round"/>
+      <circle cx="16" cy="10" r="2" fill="white"/>
+      <path d="M12 22V26M20 22V26" stroke="white" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    ScholarNest
+  </a>
+  <ul class="nav-links">
+    <li><a href="#intro">Intro</a></li>
+    <li><a href="#crystalline">Crystalline</a></li>
+    <li><a href="#defects">Defects</a></li>
+    <li><a href="#dislocations">Dislocations</a></li>
+    <li><a href="#plane-defects">Plane Defects</a></li>
+    <li><a href="#lattice">Lattice</a></li>
+    <li><a href="#miller">Miller Indices</a></li>
+    <li><a href="#packing">Close Packing</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <canvas class="hero-atoms" id="heroCanvas"></canvas>
+  <span class="hero-eyebrow">Solid State Physics</span>
+  <h1>Crystal Structure<br>&amp; Defects</h1>
+  <p class="hero-sub">A complete visual guide — from perfect lattices to real-world imperfections. Lectures 1–6 with interactive simulations.</p>
+  <div class="hero-scroll">
+    <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+    Scroll to explore
+  </div>
+</section>
+
+<!-- TABLE OF CONTENTS -->
+<div class="section toc" style="padding-top:3rem">
+  <span class="sec-label">Contents</span>
+  <h2 style="font-family:'Lora',serif;font-size:1.8rem;letter-spacing:-.02em">All Topics at a Glance</h2>
+  <div class="toc-grid">
+    <a class="toc-card" href="#intro"><span class="toc-num">01</span><span class="toc-title">Solids — Introduction</span></a>
+    <a class="toc-card" href="#crystalline"><span class="toc-num">02</span><span class="toc-title">Crystalline vs Amorphous</span></a>
+    <a class="toc-card" href="#amorphous-liquid"><span class="toc-num">03</span><span class="toc-title">Amorphous Solids & Liquids</span></a>
+    <a class="toc-card" href="#bonding"><span class="toc-num">04</span><span class="toc-title">Bonding in Amorphous Solids</span></a>
+    <a class="toc-card" href="#defects"><span class="toc-num">05</span><span class="toc-title">Crystal Defects Overview</span></a>
+    <a class="toc-card" href="#point-defects"><span class="toc-num">06</span><span class="toc-title">Point Defects</span></a>
+    <a class="toc-card" href="#vacancies"><span class="toc-num">07</span><span class="toc-title">Vacancies & Ionic Crystals</span></a>
+    <a class="toc-card" href="#dislocations"><span class="toc-num">08</span><span class="toc-title">Line Defects & Dislocations</span></a>
+    <a class="toc-card" href="#plane-defects"><span class="toc-num">09</span><span class="toc-title">Plane Defects</span></a>
+    <a class="toc-card" href="#translation"><span class="toc-num">10</span><span class="toc-title">Crystal Translation Vector</span></a>
+    <a class="toc-card" href="#unit-cell"><span class="toc-num">11</span><span class="toc-title">Unit Cell</span></a>
+    <a class="toc-card" href="#lattice"><span class="toc-num">12</span><span class="toc-title">Lattice, Basis & Crystal Systems</span></a>
+    <a class="toc-card" href="#symmetry"><span class="toc-num">13</span><span class="toc-title">Symmetry Operations</span></a>
+    <a class="toc-card" href="#bravais"><span class="toc-num">14</span><span class="toc-title">Bravais Lattices</span></a>
+    <a class="toc-card" href="#lattice-const"><span class="toc-num">15</span><span class="toc-title">Lattice Constants</span></a>
+    <a class="toc-card" href="#miller"><span class="toc-num">16</span><span class="toc-title">Miller Indices & Planes</span></a>
+    <a class="toc-card" href="#directions"><span class="toc-num">17</span><span class="toc-title">Crystal Directions</span></a>
+    <a class="toc-card" href="#interplanar"><span class="toc-num">18</span><span class="toc-title">Interplanar Spacing</span></a>
+    <a class="toc-card" href="#packing"><span class="toc-num">19</span><span class="toc-title">Closest Packed Structures</span></a>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════ -->
+<!-- SECTION 1: INTRODUCTION -->
+<!-- ══════════════════════════════════════ -->
+<section class="section" id="intro">
+  <div class="sec-header">
+    <span class="sec-label">Lecture 1 · Foundations</span>
+    <h2>Solids — Introduction</h2>
+  </div>
+  <div class="prose">
+    <p>A solid consists of <strong>atoms, ions or molecules packed closely together</strong>. The forces that hold them in place give rise to the distinctive properties of various kinds of solid.</p>
+    <p>The <strong>covalent bonds</strong> that can link a fixed number of atoms to form a certain molecule can also link an unlimited number of them to form a solid. Other types of forces — <strong>ionic, van der Waals, and metallic</strong> — bind ions, molecules and metal atoms respectively. All these forces ultimately involve <em>electric forces</em>.</p>
+    <p>Solids construct much of the physical world around us, although very little of the matter in the universe is in the solid state.</p>
+  </div>
+  <div class="card-grid">
+    <div class="card">
+      <h3><span class="icon">⚛️</span>Covalent Bonds</h3>
+      <p>Link atoms in both finite molecules and unlimited solid networks. The same directional electron sharing that makes water works at crystal scale too.</p>
+    </div>
+    <div class="card">
+      <h3><span class="icon">⚡</span>Ionic Forces</h3>
+      <p>Electrostatic attraction between oppositely charged ions. Responsible for the rigid, high-melting-point structures of salts like NaCl.</p>
+    </div>
+    <div class="card">
+      <h3><span class="icon">🔗</span>Van der Waals</h3>
+      <p>Weak, short-range forces between molecules. Holds molecular solids like ice and wax together; responsible for lower melting points.</p>
+    </div>
+    <div class="card">
+      <h3><span class="icon">🔩</span>Metallic Bonding</h3>
+      <p>Delocalized "sea of electrons" binds positive ion cores. Gives metals their characteristic conductivity, ductility and lustre.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 2: CRYSTALLINE vs AMORPHOUS -->
+<section class="section" id="crystalline">
+  <div class="sec-header">
+    <span class="sec-label">Lecture 1 · Structure</span>
+    <h2>Crystalline &amp; Amorphous Solids</h2>
+  </div>
+  <div class="prose">
+    <p>Most solids are <strong>crystalline</strong>, with atoms, ions, or molecules arranged in a <strong>regular three-dimensional repeating pattern</strong>. When the pattern extends throughout a piece of solid, it can be treated as a <em>single crystal</em>.</p>
+    <p>The presence of <strong>long-range order</strong> is the defining property of a crystal. Relatively few samples display perfect single-crystal order; most are <strong>polycrystalline</strong> — composed of many small crystals called <em>crystallites</em>.</p>
+    <p>Other solids lack a definite arrangement — they are <strong>amorphous</strong> (literally "without form"). Amorphous solids may exhibit short-range order, but <em>not</em> long-range periodicity. They may be regarded as supercooled liquids whose stiffness is due to very high viscosity — examples include plastic, gelatin, and glass.</p>
+  </div>
+
+  <!-- B2O3 visual comparison diagram -->
+  <div class="diagram-wrap">
+    <figcaption style="margin-bottom:1rem;font-style:normal;font-weight:600;font-size:.9rem">B₂O₃ — Amorphous vs Crystalline Structure (Interactive)</figcaption>
+    <canvas id="b2o3Canvas" width="680" height="300"></canvas>
+    <figcaption>(a) Amorphous B₂O₃ — short-range order only &nbsp;|&nbsp; (b) Crystalline B₂O₃ — long-range order. The key difference lies in the atomic arrangement.</figcaption>
+    <div class="sim-controls">
+      <button class="btn outline" onclick="toggleB2O3()">Toggle Animation</button>
+    </div>
+  </div>
+
+  <div class="card-grid">
+    <div class="card" style="border-color:var(--teal)">
+      <h3>🔷 Crystalline Solid</h3>
+      <ul>
+        <li>Atoms in a regular, periodic 3D pattern</li>
+        <li>Exhibits <strong>long-range order</strong></li>
+        <li>Sharp, well-defined melting point</li>
+        <li>Anisotropic properties</li>
+        <li>Example: NaCl, Diamond, Quartz</li>
+      </ul>
+    </div>
+    <div class="card" style="border-color:var(--gold)">
+      <h3>🔶 Amorphous Solid</h3>
+      <ul>
+        <li>Atoms without long-range periodic order</li>
+        <li>Only <strong>short-range order</strong></li>
+        <li>Softens gradually over a range of temperatures</li>
+        <li>Isotropic properties</li>
+        <li>Example: Glass, Rubber, Plastic, Gelatin</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 3: AMORPHOUS SOLIDS & LIQUIDS -->
+<section class="section" id="amorphous-liquid">
+  <div class="sec-header">
+    <span class="sec-label">Lecture 1</span>
+    <h2>Amorphous Solids &amp; Liquids</h2>
+  </div>
+  <div class="prose">
+    <p>The analogy between an amorphous solid and a liquid helps in understanding both states of matter. The <strong>density of a given liquid is usually close to that of the corresponding solid</strong>, which suggests that the degree of packing is similar. This inference is supported by the compressibilities of these states.</p>
+    <p><strong>X-ray diffraction</strong> indicates that many liquids have definite <em>short-range structures</em> at any instant, quite similar to those of amorphous solids — except that the groupings of liquid molecules are <strong>continually shifting</strong>.</p>
+  </div>
+  <div class="highlight">
+    <h4>Key Analogy</h4>
+    <p>Both liquids and amorphous solids show short-range order. The fundamental difference is that in a liquid, atomic groupings are constantly rearranging, while in an amorphous solid, the high viscosity "freezes" those arrangements in place.</p>
+  </div>
+</section>
+
+<!-- SECTION 4: BONDING IN AMORPHOUS SOLIDS -->
+<section class="section" id="bonding">
+  <div class="sec-header">
+    <span class="sec-label">Lecture 1</span>
+    <h2>Bonding &amp; Properties of Amorphous Solids</h2>
+  </div>
+  <div class="prose">
+    <p>The bonds in an amorphous solid <strong>vary in strength</strong> because of the lack of long-range order. When an amorphous solid is heated, the <em>weakest bonds break at lower temperatures</em> than the others, so the solid softens gradually.</p>
+    <p>In a <strong>crystalline solid</strong>, all bonds are equivalent and break simultaneously — <em>melting has a sudden onset</em> at a well-defined temperature.</p>
+    <p><strong>Metallic "glasses"</strong> have been made from mixtures of metals whose atoms differ greatly in size, which prevents them from forming the ordered structures of crystals when cooled from a molten state. One such metallic glass has <em>half the density of steel but twice its strength</em>. It is hard but can be deformed without breaking, and its gradual softening when heated makes it exceptionally easy to shape.</p>
+  </div>
+
+  <!-- Melting comparison diagram -->
+  <div class="diagram-wrap">
+    <figcaption style="margin-bottom:1rem;font-style:normal;font-weight:600;font-size:.9rem">Melting Behaviour: Crystalline vs Amorphous</figcaption>
+    <canvas id="meltCanvas" width="640" height="260"></canvas>
+    <figcaption>Crystalline solids melt sharply at T<sub>m</sub>; amorphous solids soften progressively over a temperature range.</figcaption>
+  </div>
+</section>
+
+<!-- SECTION 5: DEFECTS OVERVIEW -->
+<section class="section" id="defects">
+  <div class="sec-header">
+    <span class="sec-label">Lecture 1 · Defects</span>
+    <h2>Crystal Defects — Overview</h2>
+  </div>
+  <div class="prose">
+    <p>In a <strong>perfect crystal</strong>, each atom has a definite equilibrium location in a regular array. This concept helps to understand many properties of solids — specific heat, density, elasticity, and magnetic properties.</p>
+    <p>However, this perfect-crystal model <em>cannot explain</em> several other properties:</p>
+  </div>
+  <div class="card-grid">
+    <div class="card"><h3>🎨 Colour of Crystals</h3><p>Certain impurity centres (colour centres) absorb specific wavelengths of light.</p></div>
+    <div class="card"><h3>🔧 Plasticity</h3><p>Permanent deformation without fracture — enabled by dislocations.</p></div>
+    <div class="card"><h3>⚡ Conductivity</h3><p>Increased conductivity in pure semiconductors due to thermally generated carriers.</p></div>
+    <div class="card"><h3>💪 Strength</h3><p>Actual crystal strength depends on dislocation density and movement.</p></div>
+    <div class="card"><h3>🌡️ Melting</h3><p>Surface and grain boundary effects influence melting and crystal growth.</p></div>
+    <div class="card"><h3>💡 Luminescence</h3><p>Emission of light from crystal centres stimulated by radiation.</p></div>
+    <div class="card"><h3>🔄 Diffusion</h3><p>Atoms diffuse through solids via vacancies and interstitial paths.</p></div>
+  </div>
+  <div class="highlight gold">
+    <h4>The Reality Principle</h4>
+    <p>Actual crystals are <strong>never perfect</strong>. The existence of certain imperfections is required to account for the above properties. Real crystals behave as if containing missing atoms, atoms out of place, irregularities in row spacing, and impurities.</p>
+  </div>
+  <div class="prose" style="margin-top:1.5rem">
+    <p>There are <strong>three kinds of imperfections</strong>: point defects, line defects, and plane defects.</p>
+  </div>
+  <div class="diagram-wrap">
+    <figcaption style="margin-bottom:1rem;font-style:normal;font-weight:600;font-size:.9rem">Classification of Crystal Defects</figcaption>
+    <canvas id="defectTreeCanvas" width="660" height="220"></canvas>
+    <figcaption>Hierarchy of crystal defects: point (0D), line (1D), and plane (2D) imperfections.</figcaption>
+  </div>
+</section>
+
+<!-- SECTION 6: POINT DEFECTS -->
+<section class="section" id="point-defects">
+  <div class="sec-header">
+    <span class="sec-label">Lecture 1–2 · Point Defects</span>
+    <h2>Point Defects</h2>
+  </div>
+  <div class="prose">
+    <p>A <strong>point imperfection</strong> is a very localised interruption in the regularity of the lattice. It produces strain in the small volume of the crystal surrounding the defect but does not affect the perfection of more distant parts.</p>
+    <p>Such defects may be in the form of <strong>impurities</strong>, <strong>vacancies</strong>, or <strong>colour centres</strong> (vacancies with bound electrons/holes).</p>
+  </div>
+  <h3 style="margin:1.5rem 0 1rem;font-size:1.2rem;color:var(--teal)">1. Impurities</h3>
+  <div class="prose">
+    <p>The most obvious point defect is the presence of an <strong>impurity atom</strong> in an otherwise perfect crystal. There are two ways an impurity can fit into the structure:</p>
+  </div>
+  <div class="card-grid">
+    <div class="card">
+      <h3>🔄 Substitutional Impurity</h3>
+      <p>The impurity atom <strong>occupies a position normally occupied by the host atom</strong>. The impurity replaces a crystal atom in the lattice site. Common in alloys (e.g. Zn in Cu to make brass).</p>
+    </div>
+    <div class="card">
+      <h3>➕ Interstitial Impurity</h3>
+      <p>The impurity atom <strong>lodges in the normally unfilled void</strong> (interstice) between atoms of the host crystal. Usually small atoms like C, H, N. Example: carbon in iron to form steel.</p>
+    </div>
+  </div>
+
+  <!-- Interactive Point Defect Diagram -->
+  <div class="diagram-wrap">
+    <figcaption style="margin-bottom:1rem;font-style:normal;font-weight:600;font-size:.9rem">Interactive Point Defect Visualiser</figcaption>
+    <canvas id="pointDefectCanvas" width="680" height="300"></canvas>
+    <div class="sim-controls">
+      <button class="btn" onclick="showDefect('perfect')">Perfect Crystal</button>
+      <button class="btn" onclick="showDefect('substitutional')">Substitutional</button>
+      <button class="btn" onclick="showDefect('interstitial')">Interstitial</button>
+      <button class="btn" onclick="showDefect('vacancy')">Vacancy</button>
+      <button class="btn" onclick="showDefect('frenkel')">Frenkel Defect</button>
+      <button class="btn" onclick="showDefect('schottky')">Schottky Defect</button>
+    </div>
+    <figcaption id="defectCaption">Click a button to visualise each type of point defect.</figcaption>
+  </div>
+
+  <h3 style="margin:1.5rem 0 1rem;font-size:1.2rem;color:var(--teal)">2. Vacancies</h3>
+  <div class="prose">
+    <p>A <strong>vacancy</strong> occurs when an atom is missing from the lattice. Two types:</p>
+  </div>
+  <div class="card-grid">
+    <div class="card" style="border-color:var(--teal)">
+      <h3>🔵 Frenkel Defect</h3>
+      <p>An atom <strong>leaves its lattice site and dissolves interstitially</strong> into the structure. The associated pair — vacancy + interstitial atom — is called a Frenkel defect. Common in AgBr (silver halides).</p>
+      <p style="margin-top:.6rem;font-size:.82rem;color:var(--muted)">Also called: self-interstitial defect</p>
+    </div>
+    <div class="card" style="border-color:var(--gold)">
+      <h3>🟡 Schottky Defect</h3>
+      <p>An atom is <strong>simply missing from its lattice site</strong> — just a vacancy with no corresponding interstitial. In ionic crystals: one anion vacancy + one cation vacancy (to maintain charge neutrality).</p>
+      <p style="margin-top:.6rem;font-size:.82rem;color:var(--muted)">Dominant in NaCl, KCl</p>
+    </div>
+  </div>
+  <div class="highlight">
+    <h4>Intrinsic Vacancies — Important Properties</h4>
+    <ul style="padding-left:1.2rem">
+      <li>Both Frenkel and Schottky defects are called <strong>internal defects</strong>; their vacancies are called <strong>intrinsic vacancies</strong>.</li>
+      <li>These defects <strong>preserve stoichiometry</strong> — ions are present in exactly the numbers required by the chemical formula.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- SECTION 7: VACANCIES IN IONIC CRYSTALS -->
+<section class="section" id="vacancies">
+  <div class="sec-header">
+    <span class="sec-label">Lecture 2 · Ionic Crystals</span>
+    <h2>Vacancies in Ionic Crystals &amp; Extrinsic Defects</h2>
+  </div>
+  <div class="prose">
+    <p>In ionic crystals, a <strong>Schottky defect</strong> consists of one anion vacancy together with one cation vacancy, because the interior of the ionic crystal must remain electrically neutral.</p>
+    <p>There are also <strong>extrinsic vacancies</strong> — introduced to compensate the excess charge of an (external) substitutional impurity with the wrong valency. These external vacancies <em>do not preserve stoichiometry</em>.</p>
+  </div>
+  <div class="highlight gold">
+    <h4>Example: KCl Doped with CaCl₂</h4>
+    <p>Adding CaCl₂ to a KCl crystal creates <strong>cationic vacancies</strong>. Each Ca²⁺ ion replaces two K⁺ ions but occupies only one lattice site, leaving a vacant K⁺ site to maintain electrical neutrality. This is an <strong>extrinsic vacancy</strong>.</p>
+  </div>
+
+  <!-- Extrinsic vacancy diagram -->
+  <div class="diagram-wrap">
+    <figcaption style="margin-bottom:1rem;font-style:normal;font-weight:600;font-size:.9rem">Extrinsic Vacancy in KCl doped with CaCl₂</figcaption>
+    <canvas id="extrinsicCanvas" width="520" height="260"></canvas>
+    <figcaption>Ca²⁺ substitutes one K⁺ site but requires an adjacent K⁺ vacancy to maintain charge balance. Each Ca²⁺ creates one cationic vacancy.</figcaption>
+  </div>
+</section>
+
+<!-- SECTION 8: LINE DEFECTS / DISLOCATIONS -->
+<section class="section" id="dislocations">
+  <div class="sec-header">
+    <span class="sec-label">Lecture 2 · Line Defects</span>
+    <h2>Line Defects &amp; Dislocations</h2>
+  </div>
+  <div class="prose">
+    <p>As the name implies, <strong>line defects extend along some direction</strong> in an otherwise perfect crystal. A dislocation is a type of crystal defect in which a line of atoms is not in its proper position.</p>
+    <p>One such defect can be considered as the <em>boundary between two regions of a surface which are perfect themselves but out of register with each other</em>.</p>
+    <p>In crystals, a dislocation arises when one part of the crystal <strong>shifts or slips relative to the rest</strong> such that the displacement terminates within the crystal. If it does not terminate within the crystal, it may not introduce any defect — it is only the <em>termination</em> of the displacement that introduces the defect.</p>
+    <p>This defect is centred along a line — the <strong>dislocation line</strong> — which is also the boundary between the slipped and un-slipped regions.</p>
+  </div>
+
+  <h3 style="margin:1.5rem 0 1rem;font-size:1.2rem;color:var(--teal)">Edge Dislocation</h3>
+  <div class="prose">
+    <p>An edge dislocation can be visualised as the result of <strong>removing (or inserting) part of a layer of atoms</strong>. The extra half-plane of atoms creates a localised strain field.</p>
+    <p>The dislocation moves to the right as atoms in the layer under it successively <strong>shift their bonds</strong> with those of the upper layer, one line at a time.</p>
+    <p><strong>Edge dislocations enable ductility</strong> — a solid can be permanently deformed without breaking. Metals are the most ductile solids because, under stress, dislocations in their structure shift their positions.</p>
+  </div>
+
+  <!-- Edge dislocation simulation -->
+  <div class="diagram-wrap">
+    <figcaption style="margin-bottom:1rem;font-style:normal;font-weight:600;font-size:.9rem">Edge Dislocation — Interactive Simulation</figcaption>
+    <canvas id="edgeDislocCanvas" width="680" height="300"></canvas>
+    <div class="sim-controls">
+      <button class="btn" onclick="applyStress()">Apply Stress →</button>
+      <button class="btn outline" onclick="resetDisloc()">Reset</button>
+    </div>
+    <figcaption id="dislocCaption">The ⊥ symbol marks the dislocation line — the terminus of the extra half-plane. Click "Apply Stress" to see ductile deformation.</figcaption>
+  </div>
+
+  <h3 style="margin:1.5rem 0 1rem;font-size:1.2rem;color:var(--teal)">Screw Dislocation</h3>
+  <div class="prose">
+    <p>A screw dislocation can be visualised by imagining that a <strong>cut is made partway into a perfect crystal</strong> and one side of the cut is then displaced relative to the other.</p>
+    <p>The atomic layers <strong>spiral around the dislocation</strong>, which accounts for its name. Actual dislocations in crystals are usually <em>combinations of edge and screw dislocations</em>.</p>
+  </div>
+
+  <!-- Screw dislocation diagram -->
+  <div class="diagram-wrap">
+    <figcaption style="margin-bottom:1rem;font-style:normal;font-weight:600;font-size:.9rem">Screw Dislocation — Spiral Atomic Layers</figcaption>
+    <canvas id="screwCanvas" width="480" height="300"></canvas>
+    <figcaption>The atomic plane spirals continuously around the dislocation axis, like the thread of a screw.</figcaption>
+  </div>
+</section>
+
+<!-- SECTION 9: PLANE DEFECTS -->
+<section class="section" id="plane-defects">
+  <div class="sec-header">
+    <span class="sec-label">Lecture 3 · Plane Defects</span>
+    <h2>Plane Defects (2D Defects)</h2>
+  </div>
+  <div class="prose">
+    <p>Plane defects are those which have an <strong>areal extent (two-dimensional)</strong>. These are the most serious defects and can significantly modify the properties of the crystal.</p>
+    <p>Two main types: <strong>Stacking Faults</strong> and <strong>Grain Boundaries</strong>.</p>
+  </div>
+
+  <h3 style="margin:1.5rem 0 1rem;font-size:1.2rem;color:var(--teal)">Stacking Faults</h3>
+  <div class="prose">
+    <p>Stacking faults are <strong>planar defects where the atomic planes are not in their ideal periodic stacking sequence</strong>, leading to a deviation from the expected crystal structure. These faults can occur during crystal growth or plastic deformation, often arising from the movement of dislocations.</p>
+    <p>These defects occur in close-packed structures when the stacking sequence of atomic layers is locally out of order.</p>
+  </div>
+  <div class="highlight">
+    <h4>Example</h4>
+    <p>A regular <strong>ABCABC</strong> sequence might become <strong>ABABCABC</strong> — the two A layers create a fault plane.</p>
+  </div>
+  <div class="highlight gold">
+    <h4>Stacking Fault Energy</h4>
+    <p>This is a measure of the <strong>energy required to create a stacking fault</strong>. It is <em>inversely related</em> to the width of the stacking fault. Materials with high stacking fault energy have narrow faults and are less prone to partial dislocation splitting.</p>
+  </div>
+
+  <!-- Stacking fault diagram -->
+  <div class="diagram-wrap">
+    <figcaption style="margin-bottom:1rem;font-style:normal;font-weight:600;font-size:.9rem">Stacking Fault in FCC — ABCABC → ABABCABC</figcaption>
+    <canvas id="stackingCanvas" width="640" height="200"></canvas>
+    <figcaption>Each coloured layer represents an atomic plane. The fault region (yellow background) shows where the expected ABC sequence is disrupted.</figcaption>
+  </div>
+
+  <h3 style="margin:2rem 0 1rem;font-size:1.2rem;color:var(--teal)">Grain Boundaries</h3>
+  <div class="prose">
+    <p>A grain boundary is a <strong>two-dimensional defect at the interface where two crystal grains (crystallites) with different atomic orientations meet</strong>. These boundaries are regions of atomic mismatch and disorder.</p>
+    <p>Most materials of practical importance consist of many small interlocking crystallites or grains having random orientations. The atoms at the boundary are in an <em>irregular arrangement</em>, and the lattice is distorted because the two grains don't perfectly align.</p>
+  </div>
+  <div class="card-grid">
+    <div class="card">
+      <h3>↙️ Low-Angle Grain Boundaries</h3>
+      <p>The angle between the two crystals is <strong>small (less than about 15°)</strong>. Can be modelled as an array of edge dislocations. Misorientation is small.</p>
+    </div>
+    <div class="card">
+      <h3>↗️ High-Angle Grain Boundaries</h3>
+      <p>The angle between the two crystals is <strong>large (greater than about 15°)</strong>. More disordered transition region. Stronger effect on material properties.</p>
+    </div>
+  </div>
+
+  <!-- Grain boundary diagram -->
+  <div class="diagram-wrap">
+    <figcaption style="margin-bottom:1rem;font-style:normal;font-weight:600;font-size:.9rem">Polycrystalline Material — Grain Boundaries</figcaption>
+    <canvas id="grainCanvas" width="640" height="280"></canvas>
+    <figcaption>Each coloured region represents a crystallite (grain) with a different orientation. The boundaries between them are grain boundaries.</figcaption>
+  </div>
+
+  <h3 style="margin:2rem 0 1rem;font-size:1.1rem;color:var(--ink)">Impact on Material Properties</h3>
+  <table>
+    <tr><th>Property</th><th>Effect of Grain Boundaries</th></tr>
+    <tr><td><strong>Electrical Conductivity</strong></td><td>Decreased — disordered atoms disrupt electron flow</td></tr>
+    <tr><td><strong>Thermal Conductivity</strong></td><td>Decreased — boundaries scatter phonons</td></tr>
+    <tr><td><strong>Corrosion</strong></td><td>Boundaries are preferred sites for corrosion attack</td></tr>
+    <tr><td><strong>Creep</strong></td><td>Grain boundaries are crucial to creep mechanisms (slow progressive plastic deformation)</td></tr>
+    <tr><td><strong>Mechanical Strength</strong></td><td>Higher grain boundary density (smaller grains) → <strong>stronger material</strong> (Hall-Petch relationship)</td></tr>
+  </table>
+</section>
+
+<!-- SECTION 10: CRYSTAL TRANSLATION VECTOR -->
+<section class="section" id="translation">
+  <div class="sec-header">
+    <span class="sec-label">Lecture 3 · Lattice Theory</span>
+    <h2>Crystal Translation Vector</h2>
+  </div>
+  <div class="prose">
+    <p>A <strong>crystal translation vector</strong> is a combination of three non-coplanar primitive vectors $(\mathbf{a}_1, \mathbf{a}_2, \mathbf{a}_3)$ that can be used to generate the periodic arrangement of atoms in a crystal.</p>
+    <p>Any lattice point can be reached by adding integer multiples $(n_1, n_2, n_3)$ of these primitive vectors:</p>
+  </div>
+  <div class="math-box">
+    <span class="math-label">Crystal Translation Vector</span>
+    $$\mathbf{T} = n_1 \mathbf{a}_1 + n_2 \mathbf{a}_2 + n_3 \mathbf{a}_3$$
+  </div>
+  <div class="prose">
+    <p>This formula represents any repeating unit within the crystal structure, as every point in the crystal can be generated by performing this translation on a single starting point.</p>
+    <ul style="padding-left:1.5rem;margin:1rem 0">
+      <li>$(\mathbf{a}_1, \mathbf{a}_2, \mathbf{a}_3)$ are the <strong>fundamental translation vectors</strong> — also called <em>crystal axes</em> or <em>basis vectors</em>. They are not necessarily orthogonal or equal in magnitude.</li>
+      <li>$(n_1, n_2, n_3)$ are any arbitrary integers — positive, negative, or zero.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- SECTION 11: UNIT CELL -->
+<section class="section" id="unit-cell">
+  <div class="sec-header">
+    <span class="sec-label">Lecture 3</span>
+    <h2>Unit Cell</h2>
+  </div>
+  <div class="prose">
+    <p>A <strong>crystal unit cell</strong> is the smallest repeating unit of a crystal lattice. When repeated in different directions, this unit cell generates the entire crystal structure.</p>
+    <p>Unit cells are characterised by <strong>six parameters</strong>: the lengths of the three edges $(a_1, a_2, a_3)$ and the three angles between them.</p>
+    <p>Usually, a cell with the <strong>shortest possible size</strong> — area $a_1 \times a_2$ in 2D and volume $\mathbf{a}_1 \cdot (\mathbf{a}_2 \times \mathbf{a}_3)$ in 3D — and smallest sides is chosen as a convenient unit cell.</p>
+  </div>
+  <div class="highlight">
+    <h4>Atom Counting in a Simple Cubic Unit Cell</h4>
+    <p>A <strong>lattice density of 1</strong> in a unit cell signifies a primitive (simple cubic) unit cell with effectively <em>one atom per unit cell</em>. Each of the 8 corner atoms is shared by 8 different unit cells, so each unit cell contains only $\frac{1}{8}$ of an atom from each corner:</p>
+  </div>
+  <div class="math-box">
+    $$8 \times \frac{1}{8} = 1 \text{ atom per simple cubic unit cell}$$
+  </div>
+
+  <!-- Unit cell 3D-like diagram -->
+  <div class="diagram-wrap">
+    <figcaption style="margin-bottom:1rem;font-style:normal;font-weight:600;font-size:.9rem">Simple Cubic Unit Cell — Corner Atom Sharing</figcaption>
+    <canvas id="unitCellCanvas" width="400" height="300"></canvas>
+    <figcaption>Each corner atom (blue) is shared among 8 unit cells. The unit cell parameters $a_1, a_2, a_3$ and angles $\alpha, \beta, \gamma$ fully define the cell geometry.</figcaption>
+  </div>
+</section>
+
+<!-- SECTION 12: LATTICE + BASIS + CRYSTAL SYSTEMS -->
+<section class="section" id="lattice">
+  <div class="sec-header">
+    <span class="sec-label">Lecture 3–4</span>
+    <h2>Crystal Lattice &amp; Basis</h2>
+  </div>
+  <div class="prose">
+    <p>A <strong>Lattice</strong> is a regular periodic arrangement of points in space that looks like a net-like structure. The environment about any particular lattice point is identical to that about any other point. All lattice points are connected by the translation operation $\mathbf{T}$.</p>
+    <p><strong>Difference between Lattice and Crystal Structure:</strong> A lattice is a <em>mathematical concept</em>, whereas the crystal structure is a <em>physical picture</em> — formed by associating identically with every lattice point a structural or building unit called the <strong>basis</strong>.</p>
+    <p>The <strong>basis</strong> consists of an atom or a group of atoms, identical in composition, arrangement and orientation at every lattice point.</p>
+  </div>
+  <div class="math-box">
+    <span class="math-label">The fundamental relationship</span>
+    $$\text{Lattice} + \text{Basis} = \text{Crystal Structure}$$
+  </div>
+
+  <!-- Lattice + Basis diagram -->
+  <div class="diagram-wrap">
+    <figcaption style="margin-bottom:1rem;font-style:normal;font-weight:600;font-size:.9rem">Lattice + Basis = Crystal Structure</figcaption>
+    <canvas id="latticeBasisCanvas" width="680" height="220"></canvas>
+    <figcaption>Left: mathematical lattice (abstract points). Centre: the basis (structural unit). Right: actual crystal structure formed by placing the basis at every lattice point.</figcaption>
+  </div>
+</section>
+
+<!-- SECTION 13: SYMMETRY OPERATIONS -->
+<section class="section" id="symmetry">
+  <div class="sec-header">
+    <span class="sec-label">Lecture 4 · Symmetry</span>
+    <h2>Symmetry Operations</h2>
+  </div>
+  <div class="prose">
+    <p>A <strong>symmetry operation</strong> is one which leaves the crystal environment invariant. The operations are: <em>translation, rotation about an axis, reflection in a plane, inversion about a point</em>, and combinations of these.</p>
+    <p>They are divided into two classes:</p>
+    <ul style="padding-left:1.5rem;margin:.5rem 0 1rem">
+      <li><strong>Point Symmetry Operations:</strong> Rotation about an axis, reflection in a plane, and inversion about a point. Can be applied to all objects.</li>
+      <li><strong>Translation Operations:</strong> Applied only to lattices.</li>
+    </ul>
+  </div>
+
+  <h3 style="margin:1.5rem 0 1rem;font-size:1.1rem;color:var(--teal)">Symmetry in 2D Crystals</h3>
+  <div class="prose">
+    <p>In 2D, an <em>axis of rotation is a point</em> and a <em>plane of reflection is a line</em>.</p>
+    <p><strong>Translations:</strong> Translating by $\mathbf{T} = n_1\mathbf{a}_1 + n_2\mathbf{a}_2$ brings the crystal to an indistinguishable configuration.</p>
+    <p><strong>Rotations:</strong> A body possesses $n$-fold rotational symmetry if rotation by $\theta = 2\pi/n$ leaves it invariant.</p>
+  </div>
+
+  <h3 style="margin:1.5rem 0 1rem;font-size:1.1rem;color:var(--teal)">Allowed Rotation Axes — Derivation</h3>
+  <div class="highlight gold">
+    <h4>Key Result: Only 1-, 2-, 3-, 4-, and 6-fold Rotation Axes Are Compatible with Translational Symmetry</h4>
+    <p>Five-fold, seven-fold (and higher) axes are <em>forbidden</em> in crystals.</p>
+  </div>
+
+  <div class="math-box derivation">
+    <span class="math-label">Derivation: Permitted Rotation Axes</span>
+    <div class="step">
+      <p><strong>Setup:</strong> Consider a 2D lattice. Let $R_1$ and $R_2$ be vectors to the two closest lattice points along the primitive translation $\mathbf{a}$, with minimum separation $|\mathbf{a}|$.</p>
+    </div>
+    <div class="step">
+      <p><strong>Rotation:</strong> Suppose the line through $R_1$ is an $n$-fold rotation axis ($\theta = 2\pi/n$). By equivalence, the same axis exists at $R_2$.</p>
+      <p>Counter-clockwise rotation of $\mathbf{a}$ about $R_1$ gives a new lattice vector $\mathbf{R}_1'$; clockwise rotation about $R_2$ gives $\mathbf{R}_2'$.</p>
+    </div>
+    <div class="step">
+      <p><strong>Constraint:</strong> $\mathbf{R}_1' - \mathbf{R}_2'$ must be a lattice vector, parallel to the x-axis:</p>
+      $$\mathbf{R}_1' - \mathbf{R}_2' = p\mathbf{a}, \quad p \in \mathbb{Z}$$
+    </div>
+    <div class="step">
+      <p><strong>Geometry gives:</strong></p>
+      $$pa = a + 2a\sin\!\left(\theta - \frac{\pi}{2}\right) \implies p = 1 - 2\cos\theta$$
+      $$\therefore \quad |\cos\theta| = \left|\frac{1-p}{2}\right| \leq 1$$
+    </div>
+    <div class="step">
+      <p><strong>Allowed integer values</strong> of $p$: $\;p = -1, 0, 1, 2, 3$</p>
+      <table style="color:#e8e4dc;border-color:#333;margin:.5rem auto;font-size:.85rem;width:auto">
+        <tr style="background:#222"><th style="background:#0d7377;padding:.4rem .8rem">p</th><th style="background:#0d7377;padding:.4rem .8rem">cos θ</th><th style="background:#0d7377;padding:.4rem .8rem">θ</th><th style="background:#0d7377;padding:.4rem .8rem">n = 2π/θ</th></tr>
+        <tr><td style="padding:.3rem .8rem;border-color:#333">3</td><td style="padding:.3rem .8rem;border-color:#333">−1</td><td>π</td><td><strong>2</strong></td></tr>
+        <tr style="background:#1a1a1e"><td style="padding:.3rem .8rem;border-color:#333">2</td><td style="padding:.3rem .8rem;border-color:#333">−1/2</td><td>2π/3</td><td><strong>3</strong></td></tr>
+        <tr><td style="padding:.3rem .8rem;border-color:#333">1</td><td style="padding:.3rem .8rem;border-color:#333">0</td><td>π/2</td><td><strong>4</strong></td></tr>
+        <tr style="background:#1a1a1e"><td style="padding:.3rem .8rem;border-color:#333">0</td><td style="padding:.3rem .8rem;border-color:#333">1/2</td><td>π/3</td><td><strong>6</strong></td></tr>
+        <tr><td style="padding:.3rem .8rem;border-color:#333">−1</td><td style="padding:.3rem .8rem;border-color:#333">1</td><td>2π</td><td><strong>1</strong></td></tr>
+      </table>
+      <p class="step-note">Therefore: only n = 1, 2, 3, 4, 6 are allowed. Five-fold symmetry is incompatible with translational periodicity.</p>
+    </div>
+  </div>
+
+  <div class="diagram-wrap">
+    <figcaption style="margin-bottom:1rem;font-style:normal;font-weight:600;font-size:.9rem">Why 5-fold Symmetry Cannot Tile Space</figcaption>
+    <canvas id="pentagonCanvas" width="640" height="280"></canvas>
+    <figcaption>Connected pentagons leave gaps — they cannot fill space with translational periodicity. A 5-fold rotational axis exists about point A, but no translation vector satisfies the lattice condition.</figcaption>
+  </div>
+
+  <h3 style="margin:2rem 0 1rem;font-size:1.1rem;color:var(--teal)">Reflection Symmetry</h3>
+  <div class="prose">
+    <p>A body possesses <strong>reflection symmetry</strong> if a plane (in 3D) or line (in 2D) can be drawn dividing it into two exactly similar halves, each the mirror image of the other. This plane/line is the <strong>reflection plane</strong>, designated by $m$.</p>
+  </div>
+  <div class="prose" style="margin-top:1rem">
+    <p>There are <strong>10 possible point groups</strong> permissible in 2D crystals, designated as:<br>
+    <code>1, 1m, 2, 2mm, 3, 3m, 4, 4mm, 6, 6mm</code></p>
+    <ul style="padding-left:1.5rem;margin:.6rem 0">
+      <li>The first symbol refers to rotations about a point (e.g. group 6 = 6-fold rotations)</li>
+      <li>The second symbol refers to a reflection line parallel to the rotation axis</li>
+      <li>The third symbol refers to reflection lines perpendicular to the rotation axis</li>
+    </ul>
+    <p>A crystal having a particular point group symmetry belongs to a particular <strong>crystal class</strong>.</p>
+  </div>
+</section>
+
+<!-- SECTION 14: BRAVAIS LATTICES -->
+<section class="section" id="bravais">
+  <div class="sec-header">
+    <span class="sec-label">Lecture 4–5 · Bravais Lattices</span>
+    <h2>Bravais Lattices</h2>
+  </div>
+  <div class="prose">
+    <p>A <strong>Bravais lattice</strong> is a theoretical infinite arrangement of discrete points in space that describes the periodic geometric structure of a crystal. Each point in the lattice is identical — the environment around every point is the same.</p>
+  </div>
+
+  <h3 style="margin:1.5rem 0 1rem;font-size:1.1rem;color:var(--teal)">2D Bravais Lattices</h3>
+  <div class="prose">
+    <p>There are <strong>5 types of 2D Bravais lattices</strong>, defined by the lengths of the two primitive lattice vectors $a$ and $b$ and the angle $\gamma$ between them:</p>
+  </div>
+
+  <!-- 2D Bravais lattices diagram -->
+  <div class="diagram-wrap">
+    <figcaption style="margin-bottom:1rem;font-style:normal;font-weight:600;font-size:.9rem">Five 2D Bravais Lattices</figcaption>
+    <canvas id="bravais2DCanvas" width="680" height="250"></canvas>
+    <figcaption>From left to right: Oblique (a≠b, γ≠90°), Rectangular (a≠b, γ=90°), Centred Rectangular, Hexagonal (a=b, γ=120°), Square (a=b, γ=90°).</figcaption>
+  </div>
+
+  <div class="highlight">
+    <h4>Important Note</h4>
+    <p>In an actual crystal structure (lattice + basis), the crystal may not have the same point group as its lattice — it may have <em>lower</em> point symmetry.</p>
+  </div>
+
+  <h3 style="margin:2rem 0 1rem;font-size:1.1rem;color:var(--teal)">3D Bravais Lattices</h3>
+  <div class="prose">
+    <p>In 3D, there are <strong>32 different point groups</strong> permissible in 3D crystals, requiring <strong>14 different space lattices (Bravais lattices)</strong>, grouped into 7 crystal systems.</p>
+  </div>
+  <div class="prose" style="margin-bottom:1rem">
+    <p>Symmetry operations in 3D include:</p>
+    <ul style="padding-left:1.5rem">
+      <li><strong>Rotation axes:</strong> 1-, 2-, 3-, 4-, 6-fold (symbols 1, 2, 3, 4, 6)</li>
+      <li><strong>Reflection plane:</strong> designated $m$ (also called mirror plane)</li>
+      <li><strong>Inversion centre:</strong> if the structure is left invariant by $\mathbf{r} \to -\mathbf{r}$, denoted $\bar{1}$</li>
+      <li><strong>Rotation-inversion axes:</strong> invariant under rotation + inversion about a lattice point; denoted $\bar{1}, \bar{2}, \bar{3}, \bar{4}, \bar{6}$ — also called improper rotation axes</li>
+    </ul>
+  </div>
+
+  <table>
+    <tr><th>Crystal System</th><th>Lattice Parameters</th><th>Bravais Lattices</th><th>Example</th></tr>
+    <tr><td>Cubic</td><td>a=b=c, α=β=γ=90°</td><td>SC, BCC, FCC</td><td>NaCl, Fe, Cu</td></tr>
+    <tr><td>Tetragonal</td><td>a=b≠c, α=β=γ=90°</td><td>Simple, Body-centred</td><td>TiO₂, SnO₂</td></tr>
+    <tr><td>Orthorhombic</td><td>a≠b≠c, α=β=γ=90°</td><td>Simple, Base, Body, Face</td><td>BaSO₄</td></tr>
+    <tr><td>Hexagonal</td><td>a=b≠c, α=β=90°, γ=120°</td><td>Simple</td><td>Graphite, Mg</td></tr>
+    <tr><td>Trigonal</td><td>a=b=c, α=β=γ≠90°</td><td>Simple (Rhombohedral)</td><td>Calcite, Bi</td></tr>
+    <tr><td>Monoclinic</td><td>a≠b≠c, α=γ=90°, β≠90°</td><td>Simple, Base-centred</td><td>Gypsum</td></tr>
+    <tr><td>Triclinic</td><td>a≠b≠c, α≠β≠γ≠90°</td><td>Simple</td><td>K₂Cr₂O₇</td></tr>
+  </table>
+</section>
+
+<!-- SECTION 15: LATTICE CONSTANTS -->
+<section class="section" id="lattice-const">
+  <div class="sec-header">
+    <span class="sec-label">Lecture 5</span>
+    <h2>Lattice Constants</h2>
+  </div>
+  <div class="prose">
+    <p>The numbers $a, b, c$ (or $a_1, a_2, a_3$) specifying the size of a unit cell are called its <strong>lattice constants</strong>. For cubic lattices, a single number $a$ serves all purposes.</p>
+  </div>
+
+  <h3 style="margin:1.5rem 0 1rem;font-size:1.1rem;color:var(--teal)">Calculation of Lattice Constant for a Cubic Lattice</h3>
+  <div class="math-box derivation">
+    <span class="math-label">Derivation</span>
+    <div class="step">
+      <p>Let $\rho$ = density, $m$ = mass of unit cell, $a$ = lattice constant.</p>
+      $$\rho = \frac{m}{a^3}$$
+    </div>
+    <div class="step">
+      <p>Let $n$ = number of particles (atoms/molecules/ion-pairs) in the unit cell.<br>
+      If the crystal consists of molecules of molecular weight $M$ and Avogadro's number $N_A$:</p>
+      $$m = n \cdot \frac{M}{N_A}$$
+    </div>
+    <div class="step">
+      <p>Substituting:</p>
+      $$\rho = \frac{nM}{N_A a^3}$$
+    </div>
+    <div class="step">
+      <p>Solving for the lattice constant:</p>
+      $$\boxed{a = \left(\frac{nM}{N_A \rho}\right)^{1/3}}$$
+      <p class="step-note">When $a$ is known, we can calculate: (i) number of atoms per unit volume = $n/a^3$; (ii) nearest-neighbour distance; (iii) atomic radius — by studying the structure.</p>
+    </div>
+  </div>
+
+  <!-- Interactive lattice constant calculator -->
+  <div class="diagram-wrap">
+    <figcaption style="margin-bottom:1rem;font-style:normal;font-weight:600;font-size:.9rem">Lattice Constant Calculator</figcaption>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;max-width:500px;margin:0 auto;text-align:left">
+      <div>
+        <label style="font-size:.85rem;font-weight:600;color:var(--muted);display:block;margin-bottom:.3rem">n (atoms/unit cell)</label>
+        <input type="number" id="lc_n" value="1" min="1" style="width:100%" oninput="calcLattice()">
+      </div>
+      <div>
+        <label style="font-size:.85rem;font-weight:600;color:var(--muted);display:block;margin-bottom:.3rem">M (g/mol)</label>
+        <input type="number" id="lc_M" value="58.44" style="width:100%" oninput="calcLattice()">
+      </div>
+      <div>
+        <label style="font-size:.85rem;font-weight:600;color:var(--muted);display:block;margin-bottom:.3rem">ρ (g/cm³)</label>
+        <input type="number" id="lc_rho" value="2.16" step="0.01" style="width:100%" oninput="calcLattice()">
+      </div>
+      <div style="display:flex;flex-direction:column;justify-content:flex-end">
+        <div style="background:var(--teal-pale);border:1px solid var(--teal);border-radius:8px;padding:.7rem 1rem;text-align:center">
+          <div style="font-size:.75rem;color:var(--teal);font-weight:600;margin-bottom:.2rem">Lattice Constant a</div>
+          <div id="lc_result" style="font-size:1.4rem;font-weight:700;color:var(--teal)">5.63 Å</div>
+        </div>
+      </div>
+    </div>
+    <figcaption style="margin-top:1rem">Default values: NaCl (n=4 ion pairs → try n=4, M=58.44, ρ=2.16). Result: a ≈ 5.63 Å ✓</figcaption>
+  </div>
+</section>
+
+<!-- SECTION 16: MILLER INDICES -->
+<section class="section" id="miller">
+  <div class="sec-header">
+    <span class="sec-label">Lecture 5–6</span>
+    <h2>Crystal Planes &amp; Miller Indices</h2>
+  </div>
+  <div class="prose">
+    <p>Crystal planes are sets of parallel planes within a crystal lattice. Their orientation is described by <strong>Miller indices</strong> — a set of three integers $(hkl)$.</p>
+  </div>
+
+  <h3 style="margin:1.5rem 0 1rem;font-size:1.1rem;color:var(--teal)">How to Determine Miller Indices</h3>
+  <div class="accordion">
+    <div class="acc-item">
+      <button class="acc-header" onclick="toggleAcc(this)">
+        Step 1 — Choose Origin and Axes
+        <svg class="acc-chevron" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+      </button>
+      <div class="acc-body">
+        <p>Take any atom in the crystal as the origin and erect coordinate axes from this atom in the direction of the basis vectors. The axes may be primitive or non-primitive.</p>
+      </div>
+    </div>
+    <div class="acc-item">
+      <button class="acc-header" onclick="toggleAcc(this)">
+        Step 2 — Find Intercepts
+        <svg class="acc-chevron" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+      </button>
+      <div class="acc-body">
+        <p>Choose one plane of the set of interest and note its intercepts on the $a$, $b$ and $c$ axes in terms of lattice constants. The plane must be chosen so that no intercept is at the origin. Since all parallel planes are alike, it is convenient always to consider the plane nearest to the origin.</p>
+      </div>
+    </div>
+    <div class="acc-item">
+      <button class="acc-header" onclick="toggleAcc(this)">
+        Step 3 — Take Reciprocals and Convert to Integers
+        <svg class="acc-chevron" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+      </button>
+      <div class="acc-body">
+        <p>Take the reciprocal of each intercept and convert the fractions to the smallest set of integers. These integers are denoted $h$, $k$, $l$ — the Miller indices of the plane, enclosed in parentheses: $(hkl)$.</p>
+        <p style="margin-top:.8rem">Miller indices are the <strong>smallest whole numbers having the same ratios as the reciprocals of the intercepts</strong> expressed in terms of respective lattice constants.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="highlight gold">
+    <h4>Worked Example 1</h4>
+    <p>Intercepts: $2a$, $4b$, $3c$<br>
+    Reciprocals: $\tfrac{1}{2}$, $\tfrac{1}{4}$, $\tfrac{1}{3}$<br>
+    Multiply by LCM = 12: $6$, $3$, $4$<br>
+    Miller Indices: <strong>(634)</strong></p>
+  </div>
+  <div class="highlight">
+    <h4>Worked Example 2 — Plane Parallel to an Axis</h4>
+    <p>Intercepts: $\infty$, $1b$, $2c$<br>
+    Reciprocals: $\tfrac{1}{\infty} = 0$, $1$, $\tfrac{1}{2}$<br>
+    Multiply by 2: $0$, $2$, $1$<br>
+    Miller Indices: <strong>(021)</strong></p>
+    <p style="font-size:.85rem;margin-top:.5rem">If a plane is <em>parallel to an axis</em>, the corresponding index is <strong>zero</strong>.</p>
+  </div>
+
+  <!-- Miller Indices interactive diagram -->
+  <div class="diagram-wrap">
+    <figcaption style="margin-bottom:1rem;font-style:normal;font-weight:600;font-size:.9rem">Miller Indices — Common Planes in a Cubic Crystal</figcaption>
+    <canvas id="millerCanvas" width="680" height="280"></canvas>
+    <div class="sim-controls">
+      <button class="btn" onclick="drawMiller('100')">(100)</button>
+      <button class="btn" onclick="drawMiller('110')">(110)</button>
+      <button class="btn" onclick="drawMiller('111')">(111)</button>
+      <button class="btn" onclick="drawMiller('210')">(210)</button>
+      <button class="btn" onclick="drawMiller('021')">(021)</button>
+    </div>
+    <figcaption id="millerCaption">Click a plane to visualise it in a cubic lattice.</figcaption>
+  </div>
+</section>
+
+<!-- SECTION 17: CRYSTAL DIRECTIONS -->
+<section class="section" id="directions">
+  <div class="sec-header">
+    <span class="sec-label">Lecture 6</span>
+    <h2>Indices of Crystal Directions</h2>
+  </div>
+  <div class="prose">
+    <p>Crystal directions are lines through a crystal lattice defined by integers called direction indices. To determine them: find the coordinates of two points on the line, calculate the vector between them, and reduce the components to the smallest set of integers. Directions are enclosed in <strong>square brackets</strong>: $[hkl]$.</p>
+  </div>
+  <div class="card-grid" style="margin:1.5rem 0">
+    <div class="card"><h3>Axis Directions</h3>
+      <p>$+a$: [100], $-a$: $[\bar{1}00]$<br>$+b$: [010], $-b$: $[0\bar{1}0]$<br>$+c$: [001], $-c$: $[00\bar{1}]$</p>
+    </div>
+    <div class="card"><h3>Face Diagonals</h3>
+      <p>ab-face: [110]<br>ac-face: [101]<br>bc-face: [011]</p>
+    </div>
+    <div class="card"><h3>Body Diagonal</h3>
+      <p>Cube body diagonal: $[111]$<br>All 8 body diagonals: $\langle 111 \rangle$</p>
+    </div>
+  </div>
+  <div class="prose">
+    <p>In general, the direction of the vector $h\mathbf{a} + k\mathbf{b} + l\mathbf{c}$ is represented by $[hkl]$.</p>
+    <p>The complete set of equivalent directions of which $[hkl]$ is a member is expressed by $\langle hkl \rangle$. For example, the eight body diagonals of a cube $[111], [\bar{1}\bar{1}\bar{1}], [\bar{1}11], [1\bar{1}1]$, etc., are all designated as $\langle 111 \rangle$.</p>
+  </div>
+
+  <h3 style="margin:2rem 0 1rem;font-size:1.1rem;color:var(--teal)">Useful Relations in Cubic Systems</h3>
+  <div class="math-box">
+    <span class="math-label">Angle between directions [hkl] and [h'k'l']</span>
+    $$\cos\theta = \frac{hh' + kk' + ll'}{\sqrt{h^2 + k^2 + l^2}\;\sqrt{h'^2 + k'^2 + l'^2}}$$
+  </div>
+  <div class="math-box">
+    <span class="math-label">Normal to plane (hkl) is direction [hkl]</span>
+    <p style="font-size:.9rem;color:var(--muted);margin-bottom:.6rem">The normal to a plane has the same indices as the plane.</p>
+    $$\text{Normal to }(hkl) \equiv [hkl]$$
+  </div>
+  <div class="math-box">
+    <span class="math-label">Interplanar spacing d for planes (hkl) in cubic system</span>
+    $$d_{hkl} = \frac{a}{\sqrt{h^2 + k^2 + l^2}}$$
+  </div>
+  <div class="prose">
+    <p>The position of points in a unit cell are specified in terms of <strong>fractional parts of the basis vector magnitudes</strong> along the three coordinate directions, with the origin at a corner atom.</p>
+    <p>For example: centre of unit cell → $({\tfrac{1}{2}, \tfrac{1}{2}, \tfrac{1}{2}})$; face centres → $(\tfrac{1}{2}, \tfrac{1}{2}, 0)$, $(0, \tfrac{1}{2}, \tfrac{1}{2})$, $(\tfrac{1}{2}, 0, \tfrac{1}{2})$, etc.</p>
+  </div>
+</section>
+
+<!-- SECTION 18: INTERPLANAR SPACING DERIVATION -->
+<section class="section" id="interplanar">
+  <div class="sec-header">
+    <span class="sec-label">Lecture 6 · Assignments</span>
+    <h2>Interplanar Spacing — Derivations</h2>
+  </div>
+  <div class="prose">
+    <p>For a family of parallel planes $(hkl)$ of an <strong>orthogonal lattice</strong>, the spacing between adjacent planes is:</p>
+  </div>
+  <div class="math-box">
+    $$d_{hkl} = \frac{a}{\sqrt{h^2 + k^2 + l^2}}$$
+    <p style="font-size:.82rem;color:var(--muted);margin-top:.6rem">Note: This equation applies only to <em>simple</em> orthogonal lattices, not to BCC or FCC lattices (where the effective $d$ differs).</p>
+  </div>
+
+  <h3 style="margin:1.5rem 0 1rem;font-size:1.1rem;color:var(--teal)">BCC Lattice — Interplanar Spacings</h3>
+  <div class="math-box derivation">
+    <span class="math-label">BCC — Effective d values</span>
+    <div class="step">
+      <p>The BCC lattice has an extra lattice point at the body centre $(\tfrac{1}{2},\tfrac{1}{2},\tfrac{1}{2})$. For planes $(hkl)$ where $h+k+l$ is odd, this extra point bisects the spacing, halving $d$.</p>
+    </div>
+    <div class="step">
+      $$d_{100}^{\text{BCC}} = \frac{a}{2}, \quad d_{110}^{\text{BCC}} = \frac{a}{\sqrt{2}}, \quad d_{111}^{\text{BCC}} = \frac{a}{2\sqrt{3}}$$
+    </div>
+  </div>
+
+  <h3 style="margin:1.5rem 0 1rem;font-size:1.1rem;color:var(--teal)">FCC Lattice — Interplanar Spacings</h3>
+  <div class="math-box derivation">
+    <span class="math-label">FCC — Effective d values</span>
+    <div class="step">
+      <p>The FCC lattice has extra lattice points at face centres. For mixed $(h,k,l)$ (some odd, some even), additional planes bisect the spacing.</p>
+    </div>
+    <div class="step">
+      $$d_{100}^{\text{FCC}} = \frac{a}{2}, \quad d_{110}^{\text{FCC}} = \frac{a}{2\sqrt{2}}, \quad d_{111}^{\text{FCC}} = \frac{a}{\sqrt{3}}$$
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 19: CLOSEST PACKED STRUCTURES -->
+<section class="section" id="packing">
+  <div class="sec-header">
+    <span class="sec-label">Lecture 6 · Close Packing</span>
+    <h2>Closest Packed Structures</h2>
+  </div>
+  <div class="prose">
+    <p>"Closest packed structures" refers to the <strong>most tightly packed or space-efficient compositions of crystal structures</strong>. Imagine each atom as a sphere. While cubes can fill all space, unfilled space will always exist in sphere packing. To maximise packing efficiency, spheres must be arranged as close as possible.</p>
+    <p>The packing of spheres describes the solid structures of crystals. Atoms are assumed to be spherical to explain the bonding and structures of metallic crystals.</p>
+  </div>
+
+  <h3 style="margin:1.5rem 0 1rem;font-size:1.1rem;color:var(--teal)">Types of Holes from Close-Packing</h3>
+  <div class="card-grid">
+    <div class="card">
+      <h3>🔺 Trigonal Hole</h3>
+      <p>The hole formed between <strong>three touching spheres</strong> in a single hexagonal layer. It resembles a triangle. Also called a triangular void.</p>
+    </div>
+    <div class="card">
+      <h3>🔷 Tetrahedral Hole</h3>
+      <p>Formed when the second layer covers the trigonal holes of the first layer. A hole between <strong>4 spheres</strong> (triangular-shaped, pointing up or down). Smaller than octahedral holes.</p>
+    </div>
+    <div class="card">
+      <h3>⬡ Octahedral Hole</h3>
+      <p>A hole from the second layer that <strong>falls directly over a hole in the first layer</strong>. Surrounded by 6 spheres. Larger than tetrahedral holes — can accommodate larger interstitial atoms.</p>
+    </div>
+  </div>
+
+  <!-- Close-packing simulation -->
+  <div class="diagram-wrap">
+    <figcaption style="margin-bottom:1rem;font-style:normal;font-weight:600;font-size:.9rem">Close-Packing — Layer by Layer Interactive</figcaption>
+    <canvas id="packingCanvas" width="680" height="300"></canvas>
+    <div class="sim-controls">
+      <button class="btn" onclick="showPacking(1)">Layer A only</button>
+      <button class="btn" onclick="showPacking(2)">A + B layers</button>
+      <button class="btn" onclick="showPacking(3)">HCP (A-B-A)</button>
+      <button class="btn gold" onclick="showPacking(4)">FCC/CCP (A-B-C)</button>
+    </div>
+    <figcaption id="packingCaption">Build up layers to see how HCP and FCC close-packed structures form.</figcaption>
+  </div>
+
+  <h3 style="margin:2rem 0 1rem;font-size:1.1rem;color:var(--teal)">Hexagonal Closest Packed (HCP)</h3>
+  <div class="prose">
+    <p>In a hexagonal closest packed structure, the <strong>third layer has the same arrangement as the first layer</strong> and covers all the tetrahedral holes. Since the structure repeats after every two layers, the stacking sequence is described as $\mathbf{ABABABAB\ldots}$</p>
+    <p>The atoms in HCP efficiently occupy <strong>74% of space</strong>, while 26% is empty space.</p>
+  </div>
+  <div class="math-box">
+    <span class="math-label">Packing efficiency</span>
+    $$\eta_{\text{HCP}} = \eta_{\text{FCC/CCP}} = \frac{\pi}{3\sqrt{2}} \approx 74.05\%$$
+    $$\eta_{\text{BCC}} = \frac{\pi\sqrt{3}}{8} \approx 68.02\%$$
+    $$\eta_{\text{SC}} = \frac{\pi}{6} \approx 52.36\%$$
+  </div>
+
+  <table>
+    <tr><th>Structure</th><th>Stacking Sequence</th><th>Packing Efficiency</th><th>Coordination Number</th></tr>
+    <tr><td>HCP</td><td>ABABAB…</td><td>74%</td><td>12</td></tr>
+    <tr><td>FCC (CCP)</td><td>ABCABC…</td><td>74%</td><td>12</td></tr>
+    <tr><td>BCC</td><td>—</td><td>68%</td><td>8</td></tr>
+    <tr><td>Simple Cubic</td><td>—</td><td>52%</td><td>6</td></tr>
+  </table>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div style="display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:.8rem">
+    <svg width="28" height="28" viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="8" fill="#0d7377"/><path d="M7 22L16 10L25 22" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 18H22" stroke="white" stroke-width="2.2" stroke-linecap="round"/><circle cx="16" cy="10" r="2" fill="white"/><path d="M12 22V26M20 22V26" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg>
+    <strong>ScholarNest</strong>
+  </div>
+  <p>Crystal Structure &amp; Defects · Solid State Physics · Lectures 1–6</p>
+  <p style="margin-top:.4rem;font-size:.78rem">All content based on course notes. Simulations for educational purposes.</p>
+</footer>
+
+<!-- ═══════════════════════ SCRIPTS ═══════════════════════ -->
+<script>
+// ── Accordion ──
+function toggleAcc(btn){
+  const body=btn.nextElementSibling;
+  const open=btn.classList.toggle('open');
+  body.classList.toggle('open',open);
+}
+
+// ── Lattice Calculator ──
+function calcLattice(){
+  const n=parseFloat(document.getElementById('lc_n').value)||1;
+  const M=parseFloat(document.getElementById('lc_M').value)||58.44;
+  const rho=parseFloat(document.getElementById('lc_rho').value)||2.16;
+  const NA=6.022e23;
+  // a in cm
+  const a_cm=Math.pow((n*M)/(NA*rho),1/3);
+  const a_ang=a_cm*1e8;
+  document.getElementById('lc_result').textContent=a_ang.toFixed(3)+' Å';
+}
+calcLattice();
+
+// ── HERO CANVAS ──
+const heroC=document.getElementById('heroCanvas');
+function resizeHero(){heroC.width=heroC.parentElement.clientWidth;heroC.height=heroC.parentElement.clientHeight;}
+resizeHero();window.addEventListener('resize',resizeHero);
+const hCtx=heroC.getContext('2d');
+const atoms=[];
+for(let i=0;i<55;i++){atoms.push({x:Math.random(),y:Math.random(),r:2+Math.random()*2.5,vx:(Math.random()-.5)*.15,vy:(Math.random()-.5)*.15,o:0.3+Math.random()*.4});}
+function drawHero(){
+  hCtx.clearRect(0,0,heroC.width,heroC.height);
+  const W=heroC.width,H=heroC.height;
+  // grid of lattice points
+  const gs=55;
+  for(let x=gs/2;x<W;x+=gs){for(let y=gs/2;y<H;y+=gs){
+    hCtx.beginPath();hCtx.arc(x,y,2,0,Math.PI*2);
+    hCtx.fillStyle='rgba(13,115,119,0.15)';hCtx.fill();
+  }}
+  atoms.forEach(a=>{
+    a.x+=a.vx/W*heroC.width;a.y+=a.vy/H*heroC.height;
+    if(a.x<0||a.x>W)a.vx*=-1;if(a.y<0||a.y>H)a.vy*=-1;
+    hCtx.beginPath();hCtx.arc(a.x,a.y,a.r,0,Math.PI*2);
+    hCtx.fillStyle=`rgba(13,115,119,${a.o})`;hCtx.fill();
+  });
+  requestAnimationFrame(drawHero);
+}
+drawHero();
+
+// ── B2O3 CANVAS ──
+const b2o3C=document.getElementById('b2o3Canvas');
+const bCtx=b2o3C.getContext('2d');
+let b2o3Anim=true,b2o3T=0;
+function drawB2O3(){
+  const W=b2o3C.width,H=b2o3C.height;
+  bCtx.clearRect(0,0,W,H);
+  // Divider
+  bCtx.strokeStyle='#d9d6ce';bCtx.setLineDash([6,4]);
+  bCtx.beginPath();bCtx.moveTo(W/2,10);bCtx.lineTo(W/2,H-10);bCtx.stroke();
+  bCtx.setLineDash([]);
+  // Labels
+  bCtx.font='bold 13px Space Grotesk,sans-serif';
+  bCtx.fillStyle='#6b6b78';bCtx.textAlign='center';
+  bCtx.fillText('(a) Amorphous B₂O₃',W/4,24);
+  bCtx.fillText('(b) Crystalline B₂O₃',3*W/4,24);
+
+  // Amorphous side — random BO3 triangular units
+  const aSeeds=[{x:W/4-60,y:80},{x:W/4,y:130},{x:W/4+55,y:85},{x:W/4-30,y:185},{x:W/4+40,y:175},{x:W/4-70,y:220}];
+  aSeeds.forEach((s,i)=>{
+    const angle=b2o3T*.01*(i%2?1:-1)+i*1.1;
+    drawBO3(bCtx,s.x,s.y,angle,false);
+  });
+
+  // Crystalline side — regular hexagonal arrangement
+  const cx=3*W/4,cy=H/2,spacX=70,spacY=60;
+  const offsets=[{r:0,c:0},{r:0,c:1},{r:0,c:-1},{r:1,c:0},{r:1,c:1},{r:-1,c:0},{r:-1,c:1}];
+  offsets.forEach(o=>{
+    const px=cx+o.c*spacX+(o.r%2)*spacX/2;
+    const py=cy+o.r*spacY;
+    drawBO3(bCtx,px,py,0,true);
+  });
+  if(b2o3Anim){b2o3T++;requestAnimationFrame(drawB2O3);}
+}
+function drawBO3(ctx,x,y,angle,regular){
+  const r=18,bondLen=28;
+  // 3 oxygen atoms around central B
+  for(let i=0;i<3;i++){
+    const a=angle+i*Math.PI*2/3+(regular?Math.PI/6:0);
+    const ox=x+bondLen*Math.cos(a),oy=y+bondLen*Math.sin(a);
+    ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(ox,oy);
+    ctx.strokeStyle='rgba(13,115,119,0.4)';ctx.lineWidth=2;ctx.stroke();
+    ctx.beginPath();ctx.arc(ox,oy,7,0,Math.PI*2);
+    ctx.fillStyle='#e05c3a';ctx.fill();
+    ctx.fillStyle='white';ctx.font='bold 8px sans-serif';ctx.textAlign='center';ctx.textBaseline='middle';
+    ctx.fillText('O',ox,oy);
+  }
+  ctx.beginPath();ctx.arc(x,y,9,0,Math.PI*2);
+  ctx.fillStyle='#0d7377';ctx.fill();
+  ctx.fillStyle='white';ctx.font='bold 9px sans-serif';ctx.textAlign='center';ctx.textBaseline='middle';
+  ctx.fillText('B',x,y);
+}
+drawB2O3();
+function toggleB2O3(){b2o3Anim=!b2o3Anim;if(b2o3Anim)drawB2O3();}
+
+// ── MELTING CANVAS ──
+const meltC=document.getElementById('meltCanvas');
+const mCtx=meltC.getContext('2d');
+function drawMelting(){
+  const W=meltC.width,H=meltC.height;
+  mCtx.clearRect(0,0,W,H);
+  const pad={l:70,r:30,t:30,b:50};
+  const cw=W-pad.l-pad.r,ch=H-pad.t-pad.b;
+  // Axes
+  mCtx.strokeStyle='#888';mCtx.lineWidth=1.5;
+  mCtx.beginPath();mCtx.moveTo(pad.l,pad.t);mCtx.lineTo(pad.l,pad.t+ch);mCtx.lineTo(pad.l+cw,pad.t+ch);mCtx.stroke();
+  mCtx.fillStyle='#555';mCtx.font='12px Space Grotesk,sans-serif';mCtx.textAlign='center';
+  mCtx.fillText('Temperature →',pad.l+cw/2,H-10);
+  mCtx.save();mCtx.translate(18,pad.t+ch/2);mCtx.rotate(-Math.PI/2);
+  mCtx.fillText('Volume (or Enthalpy)',0,0);mCtx.restore();
+
+  // Crystalline — solid, sharp step
+  mCtx.beginPath();mCtx.strokeStyle='#0d7377';mCtx.lineWidth=2.5;
+  // solid phase
+  mCtx.moveTo(pad.l,pad.t+ch-20);
+  const tm=pad.l+cw*0.6;
+  mCtx.lineTo(tm,pad.t+ch-20);
+  // sharp jump
+  mCtx.lineTo(tm,pad.t+40);
+  // liquid phase
+  mCtx.lineTo(pad.l+cw,pad.t+30);
+  mCtx.stroke();
+  // Label
+  mCtx.fillStyle='#0d7377';mCtx.font='bold 12px Space Grotesk,sans-serif';mCtx.textAlign='left';
+  mCtx.fillText('Crystalline (sharp Tₘ)',tm+8,pad.t+ch-25);
+  // Tm line
+  mCtx.strokeStyle='#0d7377';mCtx.setLineDash([4,4]);mCtx.lineWidth=1;
+  mCtx.beginPath();mCtx.moveTo(tm,pad.t+ch);mCtx.lineTo(tm,pad.t+ch-5);mCtx.stroke();
+  mCtx.setLineDash([]);
+  mCtx.fillStyle='#0d7377';mCtx.textAlign='center';mCtx.font='11px Space Grotesk,sans-serif';
+  mCtx.fillText('Tₘ',tm,pad.t+ch+15);
+
+  // Amorphous — gradual curve
+  mCtx.beginPath();mCtx.strokeStyle='#c9871e';mCtx.lineWidth=2.5;
+  mCtx.moveTo(pad.l,pad.t+ch-30);
+  // curved softening
+  for(let i=0;i<=100;i++){
+    const t=i/100,x=pad.l+cw*t;
+    const y=pad.t+ch-30-50*(1/(1+Math.exp(-12*(t-.5))));
+    i===0?mCtx.moveTo(x,y):mCtx.lineTo(x,y);
+  }
+  mCtx.stroke();
+  mCtx.fillStyle='#c9871e';mCtx.textAlign='left';mCtx.font='bold 12px Space Grotesk,sans-serif';
+  mCtx.fillText('Amorphous (gradual)',pad.l+cw*0.1,pad.t+14);
+  // Legend
+  mCtx.font='11px Space Grotesk,sans-serif';mCtx.fillStyle='#888';mCtx.textAlign='center';
+  mCtx.fillText('Tg (glass transition region)',pad.l+cw*0.38,pad.t+ch-50);
+}
+drawMelting();
+
+// ── DEFECT TREE CANVAS ──
+const dtC=document.getElementById('defectTreeCanvas');
+const dtCtx=dtC.getContext('2d');
+function drawDefectTree(){
+  const W=dtC.width,H=dtC.height;
+  dtCtx.clearRect(0,0,W,H);
+  // Root
+  const root={x:W/2,y:30,label:'Crystal Defects'};
+  const level1=[{x:W/4,y:100,label:'Point Defects\n(0D)',color:'#0d7377'},{x:W/2,y:100,label:'Line Defects\n(1D)',color:'#c9871e'},{x:3*W/4,y:100,label:'Plane Defects\n(2D)',color:'#e05c3a'}];
+  const level2=[
+    [{x:W/8,y:175,label:'Impurity'},{x:W/4,y:175,label:'Vacancy\n(Frenkel/Schottky)'},{x:3*W/8,y:175,label:'Colour\nCentre'}],
+    [{x:W/2-40,y:175,label:'Edge'},{x:W/2+40,y:175,label:'Screw'}],
+    [{x:5*W/8,y:175,label:'Stacking\nFault'},{x:3*W/4+10,y:175,label:'Grain\nBoundary'}],
+  ];
+  // Draw lines root→level1
+  dtCtx.strokeStyle='#ccc';dtCtx.lineWidth=1.5;
+  level1.forEach(n=>{dtCtx.beginPath();dtCtx.moveTo(root.x,root.y+16);dtCtx.lineTo(n.x,n.y-16);dtCtx.stroke();});
+  // Lines level1→level2
+  level1.forEach((n,i)=>{level2[i].forEach(c=>{dtCtx.beginPath();dtCtx.moveTo(n.x,n.y+16);dtCtx.lineTo(c.x,c.y-12);dtCtx.stroke();});});
+  // Draw root
+  drawNode(dtCtx,root.x,root.y,root.label,'#1a1a20',true);
+  // Level1
+  level1.forEach(n=>drawNode(dtCtx,n.x,n.y,n.label,n.color,true));
+  // Level2
+  level2.forEach((arr,i)=>arr.forEach(c=>drawNode(dtCtx,c.x,c.y,c.label,level1[i].color,false)));
+}
+function drawNode(ctx,x,y,label,color,large){
+  const w=large?120:100,h=large?28:22,r=6;
+  ctx.fillStyle=color;roundRect(ctx,x-w/2,y-h/2,w,h,r);ctx.fill();
+  ctx.fillStyle='white';ctx.font=(large?'bold 11px':'10px')+' Space Grotesk,sans-serif';
+  ctx.textAlign='center';ctx.textBaseline='middle';
+  const lines=label.split('\n');
+  if(lines.length>1){lines.forEach((l,i)=>ctx.fillText(l,x,y+(i-.5)*12));}
+  else ctx.fillText(label,x,y);
+}
+function roundRect(ctx,x,y,w,h,r){ctx.beginPath();ctx.moveTo(x+r,y);ctx.lineTo(x+w-r,y);ctx.quadraticCurveTo(x+w,y,x+w,y+r);ctx.lineTo(x+w,y+h-r);ctx.quadraticCurveTo(x+w,y+h,x+w-r,y+h);ctx.lineTo(x+r,y+h);ctx.quadraticCurveTo(x,y+h,x,y+h-r);ctx.lineTo(x,y+r);ctx.quadraticCurveTo(x,y,x+r,y);ctx.closePath();}
+drawDefectTree();
+
+// ── POINT DEFECT CANVAS ──
+const pdC=document.getElementById('pointDefectCanvas');
+const pdCtx=pdC.getContext('2d');
+let currentDefect='perfect';
+const defectCaptions={
+  perfect:'Perfect crystal — all atoms at correct lattice sites (green). No defects.',
+  substitutional:'Substitutional impurity — one host atom (green) replaced by an impurity atom (orange). Same site, different species.',
+  interstitial:'Interstitial impurity — a small atom (red) lodged in the void between host atoms.',
+  vacancy:'Vacancy (Schottky) — one atom missing from its lattice site. □ marks the empty site.',
+  frenkel:'Frenkel defect — an atom has left its lattice site (vacancy □) and moved to an interstitial position (blue). Vacancy + interstitial pair.',
+  schottky:'Schottky defect in ionic crystal — one cation vacancy + one anion vacancy (shown in pairs), preserving charge neutrality.'
+};
+function drawAtomGrid(ctx,W,H,defectType){
+  ctx.clearRect(0,0,W,H);
+  const rows=5,cols=9,rx=60,ry=50,spacing=60;
+  const startX=(W-cols*spacing)/2+spacing/2;
+  const startY=(H-rows*spacing)/2+spacing/2;
+  // define special positions
+  let subPos={r:2,c:4},intPos={r:2,c:3,ox:36,oy:20};
+  let vacPos={r:2,c:5},frenkelVac={r:1,c:3},frenkelInt={r:2,c:3,ox:30,oy:-25};
+  for(let r=0;r<rows;r++){for(let c=0;c<cols;c++){
+    const x=startX+c*spacing,y=startY+r*spacing;
+    let color='#0d7377',label='A',draw=true,rr=14;
+    if(defectType==='substitutional'&&r===subPos.r&&c===subPos.c){color='#c9871e';label='B';}
+    if(defectType==='vacancy'&&r===vacPos.r&&c===vacPos.c){draw=false;}
+    if(defectType==='frenkel'&&r===frenkelVac.r&&c===frenkelVac.c){draw=false;}
+    if(defectType==='schottky'){
+      color=((r+c)%2===0)?'#0d7377':'#c9871e';
+      label=((r+c)%2===0)?'K⁺':'Cl⁻';rr=13;
+      if(r===2&&c===2){draw=false;}
+      if(r===2&&c===6){draw=false;}
+    }
+    if(draw){
+      ctx.beginPath();ctx.arc(x,y,rr,0,Math.PI*2);
+      ctx.fillStyle=color;ctx.fill();
+      ctx.strokeStyle='rgba(255,255,255,.3)';ctx.lineWidth=1.5;ctx.stroke();
+      ctx.fillStyle='white';ctx.font='bold 10px sans-serif';ctx.textAlign='center';ctx.textBaseline='middle';
+      ctx.fillText(label,x,y);
+    } else {
+      // empty site marker
+      ctx.beginPath();ctx.rect(x-10,y-10,20,20);
+      ctx.strokeStyle='#e05c3a';ctx.lineWidth=2;ctx.setLineDash([4,3]);ctx.stroke();ctx.setLineDash([]);
+      ctx.fillStyle='#e05c3a';ctx.font='bold 12px sans-serif';ctx.textAlign='center';ctx.textBaseline='middle';
+      ctx.fillText('□',x,y);
+    }
+  }}
+  // Interstitial atom
+  if(defectType==='interstitial'){
+    const ix=startX+intPos.c*spacing+intPos.ox,iy=startY+intPos.r*spacing+intPos.oy;
+    ctx.beginPath();ctx.arc(ix,iy,9,0,Math.PI*2);
+    ctx.fillStyle='#e05c3a';ctx.fill();
+    ctx.fillStyle='white';ctx.font='bold 9px sans-serif';ctx.textAlign='center';ctx.textBaseline='middle';
+    ctx.fillText('C',ix,iy);
+    ctx.strokeStyle='#e05c3a';ctx.lineWidth=1.5;ctx.setLineDash([3,2]);
+    ctx.beginPath();ctx.arc(ix,iy,20,0,Math.PI*2);ctx.stroke();ctx.setLineDash([]);
+  }
+  if(defectType==='frenkel'){
+    const ix=startX+frenkelInt.c*spacing+frenkelInt.ox,iy=startY+frenkelInt.r*spacing+frenkelInt.oy;
+    ctx.beginPath();ctx.arc(ix,iy,12,0,Math.PI*2);
+    ctx.fillStyle='#6050c0';ctx.fill();
+    ctx.fillStyle='white';ctx.font='bold 9px sans-serif';ctx.textAlign='center';ctx.textBaseline='middle';
+    ctx.fillText('A',ix,iy);
+    // Arrow from vacancy to interstitial
+    const vx=startX+frenkelVac.c*spacing,vy=startY+frenkelVac.r*spacing;
+    ctx.strokeStyle='#6050c0';ctx.lineWidth=1.5;ctx.setLineDash([3,2]);
+    ctx.beginPath();ctx.moveTo(vx,vy);ctx.lineTo(ix,iy);ctx.stroke();ctx.setLineDash([]);
+  }
+  // Legend labels
+  if(defectType==='schottky'){
+    ctx.fillStyle='#666';ctx.font='11px Space Grotesk,sans-serif';ctx.textAlign='center';
+    ctx.fillText('□ = vacancy',W/2,H-8);
+  }
+}
+function showDefect(type){
+  currentDefect=type;
+  drawAtomGrid(pdCtx,pdC.width,pdC.height,type);
+  document.getElementById('defectCaption').textContent=defectCaptions[type];
+}
+showDefect('perfect');
+
+// ── EXTRINSIC VACANCY CANVAS ──
+const exC=document.getElementById('extrinsicCanvas');
+const exCtx=exC.getContext('2d');
+function drawExtrinsic(){
+  const W=exC.width,H=exC.height;
+  exCtx.clearRect(0,0,W,H);
+  const rows=4,cols=6,sp=65,startX=(W-cols*sp)/2+sp/2,startY=(H-rows*sp)/2+sp/2;
+  for(let r=0;r<rows;r++){for(let c=0;c<cols;c++){
+    const x=startX+c*sp,y=startY+r*sp;
+    // Ion type alternates: K+=teal, Cl-=orange
+    let color=(r+c)%2===0?'#0d7377':'#c9871e';
+    let label=(r+c)%2===0?'K⁺':'Cl⁻';
+    let rr=14;
+    // Ca2+ replaces K+ at (1,2)
+    if(r===1&&c===2){color='#2a6db5';label='Ca²⁺';rr=16;}
+    // Vacancy at (2,3) — the missing K+ needed for charge balance
+    if(r===2&&c===3&&(r+c)%2===0){
+      exCtx.beginPath();exCtx.rect(x-13,y-13,26,26);
+      exCtx.strokeStyle='#e05c3a';exCtx.lineWidth=2.5;exCtx.setLineDash([5,3]);exCtx.stroke();exCtx.setLineDash([]);
+      exCtx.fillStyle='#e05c3a';exCtx.font='bold 11px sans-serif';exCtx.textAlign='center';exCtx.textBaseline='middle';
+      exCtx.fillText('□',x,y);
+      continue;
+    }
+    exCtx.beginPath();exCtx.arc(x,y,rr,0,Math.PI*2);
+    exCtx.fillStyle=color;exCtx.fill();
+    exCtx.strokeStyle='rgba(255,255,255,.3)';exCtx.lineWidth=1.5;exCtx.stroke();
+    exCtx.fillStyle='white';exCtx.font='bold '+(rr>14?'8':'9')+'px sans-serif';
+    exCtx.textAlign='center';exCtx.textBaseline='middle';exCtx.fillText(label,x,y);
+  }}
+  // Annotation
+  const cx=startX+2*sp,cy=startY+sp;
+  exCtx.strokeStyle='#2a6db5';exCtx.lineWidth=1.5;
+  exCtx.beginPath();exCtx.moveTo(cx+18,cy-18);exCtx.lineTo(cx+60,cy-45);exCtx.stroke();
+  exCtx.fillStyle='#2a6db5';exCtx.font='11px Space Grotesk,sans-serif';exCtx.textAlign='left';
+  exCtx.fillText('Ca²⁺ (dopant)',cx+62,cy-48);
+  const vx=startX+3*sp,vy=startY+2*sp;
+  exCtx.strokeStyle='#e05c3a';
+  exCtx.beginPath();exCtx.moveTo(vx+18,vy+18);exCtx.lineTo(vx+55,vy+45);exCtx.stroke();
+  exCtx.fillStyle='#e05c3a';exCtx.font='11px Space Grotesk,sans-serif';
+  exCtx.fillText('K⁺ vacancy',vx+57,vy+48);
+}
+drawExtrinsic();
+
+// ── EDGE DISLOCATION SIMULATION ──
+const edC=document.getElementById('edgeDislocCanvas');
+const edCtx=edC.getContext('2d');
+let dislocStep=0,dislocMax=6;
+function drawEdgeDisloc(step){
+  const W=edC.width,H=edC.height;
+  edCtx.clearRect(0,0,W,H);
+  const rows=6,cols=11,sp=54,startX=(W-cols*sp)/2,startY=30;
+  const slipRow=Math.floor(rows/2); // slip plane between row 2 and 3
+  const extraHalfEnd=3+step; // where extra half-plane ends (column)
+  // Draw atoms
+  for(let r=0;r<rows;r++){
+    for(let c=0;c<cols;c++){
+      let x=startX+c*sp,y=startY+r*sp;
+      // top half: extra half-plane inserted above slipRow up to extraHalfEnd
+      if(r<slipRow&&c<=extraHalfEnd){x+=sp/2;} // shift right by half spacing
+      // distortion near dislocation
+      if(r===slipRow-1&&c===extraHalfEnd){y-=8;x+=4;}
+      if(r===slipRow&&c===extraHalfEnd){y+=8;}
+      edCtx.beginPath();edCtx.arc(x,y,12,0,Math.PI*2);
+      edCtx.fillStyle=(r<slipRow)?'#0d7377':'#14a085';
+      edCtx.fill();edCtx.strokeStyle='rgba(255,255,255,.2)';edCtx.lineWidth=1;edCtx.stroke();
+    }
+  }
+  // Slip plane line
+  edCtx.strokeStyle='#e05c3a';edCtx.lineWidth=2;edCtx.setLineDash([6,4]);
+  edCtx.beginPath();edCtx.moveTo(startX-10,startY+slipRow*sp);edCtx.lineTo(W-20,startY+slipRow*sp);
+  edCtx.stroke();edCtx.setLineDash([]);
+  // Dislocation symbol ⊥ at extra half plane terminus
+  const dx=startX+(extraHalfEnd+0.5)*sp,dy=startY+(slipRow-1)*sp+30;
+  edCtx.fillStyle='#e05c3a';edCtx.font='bold 22px sans-serif';edCtx.textAlign='center';
+  edCtx.fillText('⊥',dx,dy);
+  // Stress arrows
+  if(step>0){
+    edCtx.fillStyle='#c9871e';edCtx.strokeStyle='#c9871e';edCtx.lineWidth=2;
+    arrow(edCtx,W-30,startY+slipRow*sp,W-60,startY+slipRow*sp);
+    edCtx.fillStyle='#c9871e';edCtx.font='bold 11px Space Grotesk,sans-serif';
+    edCtx.textAlign='right';edCtx.fillText('Applied stress →',W-12,startY+slipRow*sp-12);
+  }
+  // Caption
+  edCtx.fillStyle='#555';edCtx.font='11px Space Grotesk,sans-serif';edCtx.textAlign='center';
+  if(step===0)edCtx.fillText('Initial configuration with edge dislocation (⊥)',W/2,H-10);
+  else if(step<dislocMax)edCtx.fillText(`Dislocation moving right under stress (step ${step}/${dislocMax})`,W/2,H-10);
+  else edCtx.fillText('Crystal permanently deformed — ductile failure without fracture!',W/2,H-10);
+}
+function arrow(ctx,x1,y1,x2,y2){
+  ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.stroke();
+  const a=Math.atan2(y2-y1,x2-x1);
+  ctx.beginPath();ctx.moveTo(x2,y2);ctx.lineTo(x2+10*Math.cos(a-0.4),y2+10*Math.sin(a-0.4));
+  ctx.lineTo(x2+10*Math.cos(a+0.4),y2+10*Math.sin(a+0.4));ctx.closePath();ctx.fill();
+}
+let dislocAnimId=null;
+function applyStress(){
+  if(dislocAnimId)return;
+  if(dislocStep>=dislocMax){dislocStep=0;}
+  dislocAnimId=setInterval(()=>{
+    dislocStep++;drawEdgeDisloc(dislocStep);
+    if(dislocStep>=dislocMax){clearInterval(dislocAnimId);dislocAnimId=null;}
+  },500);
+}
+function resetDisloc(){clearInterval(dislocAnimId);dislocAnimId=null;dislocStep=0;drawEdgeDisloc(0);}
+drawEdgeDisloc(0);
+
+// ── SCREW DISLOCATION CANVAS ──
+const scC=document.getElementById('screwCanvas');
+const scCtx=scC.getContext('2d');
+function drawScrew(){
+  const W=scC.width,H=scC.height,cx=W/2,cy=H/2;
+  scCtx.clearRect(0,0,W,H);
+  // Draw spiral layers
+  const layers=8,pointsPerLayer=12;
+  scCtx.lineWidth=2;
+  for(let l=0;l<layers;l++){
+    const r=30+l*17,yOff=(l-layers/2)*18;
+    scCtx.beginPath();
+    scCtx.strokeStyle=`hsl(${175+l*15},60%,${35+l*4}%)`;
+    for(let p=0;p<=pointsPerLayer;p++){
+      const a=(p/pointsPerLayer)*Math.PI*2;
+      const x=cx+r*Math.cos(a);
+      const y=cy+r*Math.sin(a)*0.35+yOff;
+      p===0?scCtx.moveTo(x,y):scCtx.lineTo(x,y);
+    }
+    scCtx.stroke();
+    // Atoms on layer
+    for(let p=0;p<pointsPerLayer;p+=2){
+      const a=(p/pointsPerLayer)*Math.PI*2;
+      const x=cx+r*Math.cos(a),y=cy+r*Math.sin(a)*0.35+yOff;
+      scCtx.beginPath();scCtx.arc(x,y,5,0,Math.PI*2);
+      scCtx.fillStyle=`hsl(${175+l*15},65%,40%)`;scCtx.fill();
+    }
+  }
+  // Dislocation axis
+  scCtx.strokeStyle='#e05c3a';scCtx.lineWidth=2.5;scCtx.setLineDash([6,4]);
+  scCtx.beginPath();scCtx.moveTo(cx,cy-layers*10);scCtx.lineTo(cx,cy+layers*10);scCtx.stroke();
+  scCtx.setLineDash([]);
+  scCtx.fillStyle='#e05c3a';scCtx.font='bold 11px Space Grotesk,sans-serif';scCtx.textAlign='center';
+  scCtx.fillText('Dislocation axis',cx,cy+layers*10+15);
+  // Arrow showing spiral
+  scCtx.fillStyle='#888';scCtx.font='11px Space Grotesk,sans-serif';
+  scCtx.fillText('↺ Atomic layers spiral around axis',cx,20);
+}
+drawScrew();
+
+// ── STACKING FAULT ──
+const sfC=document.getElementById('stackingCanvas');
+const sfCtx=sfC.getContext('2d');
+function drawStacking(){
+  const W=sfC.width,H=sfC.height;
+  sfCtx.clearRect(0,0,W,H);
+  // Define layer sequence: ABCABABCABC — fault in middle
+  const layers=['A','B','C','A','B','A','B','C','A','B','C'];
+  const faultStart=4,faultEnd=6; // index where ABCABC becomes ABABCABC
+  const lh=30,pw=36,sp=44,startX=40,startY=25;
+  // Highlight fault region
+  sfCtx.fillStyle='rgba(201,135,30,0.12)';
+  sfCtx.fillRect(startX+(faultStart)*sp-pw/2-5,startY-5,
+    (faultEnd-faultStart+1)*sp+pw/2-2,layers.length*lh+10);
+  sfCtx.strokeStyle='#c9871e';sfCtx.lineWidth=1.5;sfCtx.setLineDash([4,3]);
+  sfCtx.strokeRect(startX+(faultStart)*sp-pw/2-5,startY-5,
+    (faultEnd-faultStart+1)*sp+pw/2-2,layers.length*lh+10);
+  sfCtx.setLineDash([]);
+  sfCtx.fillStyle='#c9871e';sfCtx.font='bold 10px Space Grotesk,sans-serif';sfCtx.textAlign='left';
+  sfCtx.fillText('Fault region',startX+(faultStart)*sp-pw/2,startY+layers.length*lh+22);
+
+  const colors={'A':'#0d7377','B':'#2a6db5','C':'#c9871e'};
+  // For each layer show a row of atoms
+  layers.forEach((layer,li)=>{
+    const y=startY+li*lh;
+    const offset=(layer==='B'?sp*0.5:layer==='C'?sp*1:0);
+    // Draw 10 atoms
+    for(let i=0;i<10;i++){
+      const x=startX+i*sp+offset;
+      sfCtx.beginPath();sfCtx.arc(x,y+lh/2,13,0,Math.PI*2);
+      sfCtx.fillStyle=colors[layer];sfCtx.fill();
+      sfCtx.fillStyle='white';sfCtx.font='bold 9px sans-serif';sfCtx.textAlign='center';sfCtx.textBaseline='middle';
+      sfCtx.fillText(layer,x,y+lh/2);
+    }
+    // Layer label
+    sfCtx.fillStyle=colors[layer];sfCtx.font='bold 12px Space Grotesk,sans-serif';sfCtx.textAlign='right';sfCtx.textBaseline='middle';
+    sfCtx.fillText(layer,startX-10,y+lh/2);
+  });
+  // Sequence label
+  sfCtx.fillStyle='#555';sfCtx.font='11px Space Grotesk,sans-serif';sfCtx.textAlign='center';sfCtx.textBaseline='alphabetic';
+  sfCtx.fillText('Stacking: A B C A | B A B | C A B C  (fault = B-A-B instead of B-C-B)',W/2,H-5);
+}
+drawStacking();
+
+// ── GRAIN BOUNDARY ──
+const gbC=document.getElementById('grainCanvas');
+const gbCtx=gbC.getContext('2d');
+function drawGrains(){
+  const W=gbC.width,H=gbC.height;
+  gbCtx.clearRect(0,0,W,H);
+  // Draw several Voronoi-like grain regions
+  const seeds=[{x:120,y:100,ang:0,col:'#c5e8e9'},{x:320,y:80,ang:0.4,col:'#d4e8c5'},{x:520,y:110,ang:-0.5,col:'#e8d4c5'},{x:180,y:220,ang:0.8,col:'#d4c5e8'},{x:400,y:210,ang:-0.3,col:'#e8c5d4'},{x:590,y:200,ang:1.1,col:'#c5d4e8'},{x:100,y:260,ang:-0.7,col:'#e8e8c5'}];
+  // Draw atom grids in each region by clipping
+  seeds.forEach((s,si)=>{
+    gbCtx.save();
+    // simple rectangular clip region around seed (approximation)
+    gbCtx.fillStyle=s.col;
+    // draw a blot
+    gbCtx.beginPath();
+    const pts=8,rvar=50+si*10;
+    for(let i=0;i<pts;i++){
+      const a=i/pts*Math.PI*2+(si*.7);
+      const r=rvar+25*Math.sin(i*2.3+si);
+      const x=s.x+r*Math.cos(a),y=s.y+r*Math.sin(a);
+      i===0?gbCtx.moveTo(x,y):gbCtx.lineTo(x,y);
+    }
+    gbCtx.closePath();gbCtx.fill();gbCtx.clip();
+    // atoms in grid rotated by ang
+    gbCtx.translate(s.x,s.y);gbCtx.rotate(s.ang);
+    const gsp=18;
+    for(let r=-5;r<=5;r++){for(let c=-6;c<=6;c++){
+      const ax=c*gsp,ay=r*gsp;
+      gbCtx.beginPath();gbCtx.arc(ax,ay,4,0,Math.PI*2);
+      gbCtx.fillStyle=`hsl(${175+si*40},55%,35%)`;gbCtx.fill();
+    }}
+    gbCtx.restore();
+  });
+  // Grain boundary overlay — draw border of each grain
+  seeds.forEach((s,si)=>{
+    gbCtx.beginPath();
+    const pts=8,rvar=50+si*10;
+    for(let i=0;i<pts;i++){
+      const a=i/pts*Math.PI*2+(si*.7);
+      const r=rvar+25*Math.sin(i*2.3+si);
+      const x=s.x+r*Math.cos(a),y=s.y+r*Math.sin(a);
+      i===0?gbCtx.moveTo(x,y):gbCtx.lineTo(x,y);
+    }
+    gbCtx.closePath();gbCtx.strokeStyle='#555';gbCtx.lineWidth=2;gbCtx.stroke();
+  });
+  // Label a few grain boundaries
+  gbCtx.fillStyle='#333';gbCtx.font='bold 10px Space Grotesk,sans-serif';gbCtx.textAlign='center';
+  gbCtx.fillText('Grain Boundary',310,155);
+  gbCtx.fillStyle='#333';gbCtx.font='10px Space Grotesk,sans-serif';
+  gbCtx.fillText('Grain 1',120,95);gbCtx.fillText('Grain 2',320,75);gbCtx.fillText('Grain 3',520,105);
+}
+drawGrains();
+
+// ── UNIT CELL 3D ──
+const ucC=document.getElementById('unitCellCanvas');
+const ucCtx=ucC.getContext('2d');
+function drawUnitCell(){
+  const W=ucC.width,H=ucC.height;
+  ucCtx.clearRect(0,0,W,H);
+  const cx=W/2,cy=H/2,s=90;
+  // 3D isometric cube
+  const iso=(a)=>[Math.cos(Math.PI/6)*a,-Math.sin(Math.PI/6)*a];
+  const pts={
+    '000':[cx,cy+s],
+    '100':[cx+s,cy+s*0.5],
+    '010':[cx-iso(s)[0],cy+s+iso(s)[1]],
+    '001':[cx,cy],
+    '110':[cx+s-iso(s)[0],cy+s*0.5+iso(s)[1]],
+    '011':[cx-iso(s)[0],cy+iso(s)[1]],
+    '101':[cx+s,cy-s*0.5],
+    '111':[cx+s-iso(s)[0],cy-s*0.5+iso(s)[1]],
+  };
+  // Edges
+  const edges=[['000','100'],['000','010'],['000','001'],
+               ['100','110'],['100','101'],['010','110'],['010','011'],
+               ['001','101'],['001','011'],['110','111'],['101','111'],['011','111']];
+  ucCtx.strokeStyle='#aaa';ucCtx.lineWidth=1.5;
+  edges.forEach(([a,b])=>{
+    ucCtx.beginPath();ucCtx.moveTo(...pts[a]);ucCtx.lineTo(...pts[b]);ucCtx.stroke();
+  });
+  // Corner atoms
+  Object.entries(pts).forEach(([k,p])=>{
+    ucCtx.beginPath();ucCtx.arc(p[0],p[1],12,0,Math.PI*2);
+    ucCtx.fillStyle='#0d7377';ucCtx.fill();
+    ucCtx.fillStyle='white';ucCtx.font='bold 8px sans-serif';ucCtx.textAlign='center';ucCtx.textBaseline='middle';
+    ucCtx.fillText('¹⁄₈',p[0],p[1]);
+  });
+  // Labels
+  ucCtx.fillStyle='#c9871e';ucCtx.font='bold 12px Space Grotesk,sans-serif';ucCtx.textAlign='center';
+  ucCtx.fillText('a₁',cx+s/2+5,cy+s*0.85);
+  ucCtx.fillText('a₂',cx-35,cy+s*0.65);
+  ucCtx.fillText('a₃',cx+8,cy+s*0.4);
+  // Total atoms label
+  ucCtx.fillStyle='#555';ucCtx.font='12px Space Grotesk,sans-serif';
+  ucCtx.fillText('8 corners × ⅛ = 1 atom / unit cell',cx,H-15);
+}
+drawUnitCell();
+
+// ── LATTICE + BASIS ──
+const lbC=document.getElementById('latticeBasisCanvas');
+const lbCtx=lbC.getContext('2d');
+function drawLatticeBasis(){
+  const W=lbC.width,H=lbC.height;
+  lbCtx.clearRect(0,0,W,H);
+  const panelW=W/3;
+  // Panel labels
+  ['Lattice (abstract)','Basis','Crystal Structure'].forEach((l,i)=>{
+    lbCtx.fillStyle='#555';lbCtx.font='bold 11px Space Grotesk,sans-serif';lbCtx.textAlign='center';
+    lbCtx.fillText(l,(i+0.5)*panelW,18);
+  });
+  // Dividers
+  lbCtx.strokeStyle=var_border();lbCtx.lineWidth=1;lbCtx.setLineDash([4,3]);
+  [1,2].forEach(i=>{lbCtx.beginPath();lbCtx.moveTo(i*panelW,25);lbCtx.lineTo(i*panelW,H-10);lbCtx.stroke();});
+  lbCtx.setLineDash([]);
+  // + and = signs
+  lbCtx.fillStyle='#0d7377';lbCtx.font='bold 28px sans-serif';lbCtx.textAlign='center';
+  lbCtx.fillText('+',panelW*1,H/2+8);
+  lbCtx.fillText('=',panelW*2,H/2+8);
+  // Lattice: 4x4 points
+  const sp=36,lsx=panelW/2-1.5*sp,lsy=35;
+  for(let r=0;r<4;r++)for(let c=0;c<4;c++){
+    lbCtx.beginPath();lbCtx.arc(lsx+c*sp,lsy+r*sp,5,0,Math.PI*2);
+    lbCtx.fillStyle='#0d7377';lbCtx.fill();
+  }
+  // Basis: single diatomic molecule
+  const bx=panelW*1.5,by=H/2;
+  lbCtx.beginPath();lbCtx.moveTo(bx-14,by);lbCtx.lineTo(bx+14,by);
+  lbCtx.strokeStyle='#888';lbCtx.lineWidth=2;lbCtx.stroke();
+  [bx-14,bx+14].forEach((x,i)=>{
+    lbCtx.beginPath();lbCtx.arc(x,by,10,0,Math.PI*2);
+    lbCtx.fillStyle=i===0?'#0d7377':'#c9871e';lbCtx.fill();
+    lbCtx.fillStyle='white';lbCtx.font='bold 8px sans-serif';lbCtx.textAlign='center';lbCtx.textBaseline='middle';
+    lbCtx.fillText(i===0?'A':'B',x,by);
+  });
+  // Crystal: basis at each lattice point
+  const csx=panelW*2+panelW/2-1.5*sp,csy=35;
+  for(let r=0;r<4;r++)for(let c=0;c<4;c++){
+    const px=csx+c*sp,py=csy+r*sp;
+    lbCtx.beginPath();lbCtx.moveTo(px-8,py);lbCtx.lineTo(px+8,py);
+    lbCtx.strokeStyle='#ccc';lbCtx.lineWidth=1.5;lbCtx.stroke();
+    [{x:-8,col:'#0d7377',l:'A'},{x:8,col:'#c9871e',l:'B'}].forEach(a=>{
+      lbCtx.beginPath();lbCtx.arc(px+a.x,py,6,0,Math.PI*2);
+      lbCtx.fillStyle=a.col;lbCtx.fill();
+      lbCtx.fillStyle='white';lbCtx.font='bold 6px sans-serif';lbCtx.textAlign='center';lbCtx.textBaseline='middle';
+      lbCtx.fillText(a.l,px+a.x,py);
+    });
+  }
+}
+function var_border(){return '#d9d6ce';}
+drawLatticeBasis();
+
+// ── PENTAGON CANVAS ──
+const penC=document.getElementById('pentagonCanvas');
+const penCtx=penC.getContext('2d');
+function drawPentagons(){
+  const W=penC.width,H=penC.height;
+  penCtx.clearRect(0,0,W,H);
+  // Draw 7 pentagons showing gaps
+  const r=55,cx=W/2,cy=H/2-10;
+  const penCentres=[[cx,cy]];
+  for(let i=0;i<5;i++){
+    const a=i*Math.PI*2/5-Math.PI/2;
+    penCentres.push([cx+r*1.95*Math.cos(a),cy+r*1.95*Math.sin(a)]);
+  }
+  penCentres.forEach((c,i)=>{
+    drawPentagon(penCtx,c[0],c[1],r,i===0?'#c5e8e9':'#d4e8c5',i===0);
+  });
+  // Highlight gaps with red shading
+  penCtx.fillStyle='rgba(224,92,58,0.2)';
+  // approximate gap near top-right
+  penCtx.beginPath();penCtx.arc(cx+r*1.95*0.5,cy-r*1.95*0.87,18,0,Math.PI*2);penCtx.fill();
+  penCtx.fillStyle='rgba(224,92,58,0.2)';
+  penCtx.beginPath();penCtx.arc(cx+r*1.95,cy,18,0,Math.PI*2);penCtx.fill();
+  // Labels
+  penCtx.fillStyle='#e05c3a';penCtx.font='bold 11px Space Grotesk,sans-serif';penCtx.textAlign='center';
+  penCtx.fillText('GAP',cx+r*1.95*0.5+2,cy-r*1.95*0.87+4);
+  penCtx.fillText('A',cx,cy);
+  penCtx.fillStyle='#555';penCtx.font='11px Space Grotesk,sans-serif';
+  penCtx.fillText('5-fold symmetry about A — but gaps prevent tiling → no translational symmetry',W/2,H-8);
+}
+function drawPentagon(ctx,cx,cy,r,fill,center){
+  ctx.beginPath();
+  for(let i=0;i<5;i++){
+    const a=i*Math.PI*2/5-Math.PI/2;
+    const x=cx+r*Math.cos(a),y=cy+r*Math.sin(a);
+    i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);
+  }
+  ctx.closePath();ctx.fillStyle=fill;ctx.fill();
+  ctx.strokeStyle='#0d7377';ctx.lineWidth=2;ctx.stroke();
+}
+drawPentagons();
+
+// ── 2D BRAVAIS ──
+const bv2C=document.getElementById('bravais2DCanvas');
+const bv2Ctx=bv2C.getContext('2d');
+function drawBravais2D(){
+  const W=bv2C.width,H=bv2C.height;
+  bv2Ctx.clearRect(0,0,W,H);
+  const types=[
+    {name:'Oblique',a:40,b:30,gamma:70,cx:65,cy:H/2-10},
+    {name:'Rectangular',a:45,b:30,gamma:90,cx:195,cy:H/2-10},
+    {name:'Centred\nRectangular',a:45,b:30,gamma:90,centred:true,cx:335,cy:H/2-10},
+    {name:'Hexagonal',a:38,b:38,gamma:120,cx:470,cy:H/2-10},
+    {name:'Square',a:38,b:38,gamma:90,cx:600,cy:H/2-10},
+  ];
+  types.forEach(t=>{
+    const g=t.gamma*Math.PI/180;
+    const ax=t.a,ay=0,bx=t.b*Math.cos(g),by=-t.b*Math.sin(g);
+    const pts=[];
+    for(let r=-1;r<=1;r++)for(let c=-1;c<=1;c++){
+      pts.push([t.cx+c*ax+r*bx,t.cy+c*ay+r*by]);
+    }
+    // Draw cell
+    [[0,0],[ax,0],[ax+bx,by],[bx,by],[0,0]].reduce((prev,cur,i)=>{
+      if(i>0){
+        bv2Ctx.beginPath();bv2Ctx.moveTo(t.cx+prev[0],t.cy+prev[1]);
+        bv2Ctx.lineTo(t.cx+cur[0],t.cy+cur[1]);
+        bv2Ctx.strokeStyle='rgba(13,115,119,.4)';bv2Ctx.lineWidth=1.5;bv2Ctx.stroke();
+      }
+      return cur;
+    });
+    // Atoms
+    pts.forEach(p=>{
+      bv2Ctx.beginPath();bv2Ctx.arc(p[0],p[1],7,0,Math.PI*2);
+      bv2Ctx.fillStyle='#0d7377';bv2Ctx.fill();
+    });
+    // Centred atom
+    if(t.centred){
+      bv2Ctx.beginPath();bv2Ctx.arc(t.cx+(ax+bx)/2,t.cy+(ay+by)/2,7,0,Math.PI*2);
+      bv2Ctx.fillStyle='#c9871e';bv2Ctx.fill();
+    }
+    // Label
+    bv2Ctx.fillStyle='#333';bv2Ctx.font='bold 10px Space Grotesk,sans-serif';bv2Ctx.textAlign='center';
+    t.name.split('\n').forEach((l,i)=>bv2Ctx.fillText(l,t.cx,t.cy+65+i*14));
+  });
+}
+drawBravais2D();
+
+// ── MILLER INDICES CANVAS ──
+const miC=document.getElementById('millerCanvas');
+const miCtx=miC.getContext('2d');
+let currentMiller='100';
+const millerInfo={
+  '100':{desc:'(100) — intercepts: a, ∞, ∞. Perpendicular to x-axis.'},
+  '110':{desc:'(110) — intercepts: a, b, ∞. Diagonal of ab-face.'},
+  '111':{desc:'(111) — intercepts: a, b, c. Body diagonal plane.'},
+  '210':{desc:'(210) — intercepts: a/2, b, ∞. Cuts x-axis at half unit cell.'},
+  '021':{desc:'(021) — intercepts: ∞, b/2, c. Parallel to x-axis.'},
+};
+function drawMiller(plane){
+  currentMiller=plane;
+  const W=miC.width,H=miC.height;
+  miCtx.clearRect(0,0,W,H);
+  // Draw 4x4x1 lattice dots in 3D isometric
+  const s=50,cx=W/2-50,cy=H/2+20;
+  // Isometric grid
+  const rows=5,cols=5;
+  for(let r=0;r<rows;r++)for(let c=0;c<cols;c++){
+    const [ix,iy]=iso3D(c,r,0,s,cx,cy);
+    miCtx.beginPath();miCtx.arc(ix,iy,5,0,Math.PI*2);
+    miCtx.fillStyle='rgba(13,115,119,0.6)';miCtx.fill();
+  }
+  // Draw highlighted plane
+  const [h,k,l]=[parseInt(plane[0]),parseInt(plane[1]),parseInt(plane[2])];
+  drawMillerPlane(miCtx,h,k,l,s,cx,cy,rows,cols);
+  // Axes
+  miCtx.strokeStyle='#888';miCtx.lineWidth=1.5;
+  const origin=iso3D(0,0,0,s,cx,cy);
+  const xEnd=iso3D(cols,0,0,s,cx,cy);
+  const yEnd=iso3D(0,rows,0,s,cx,cy);
+  const zEnd=iso3D(0,0,2.5,s,cx,cy);
+  [xEnd,yEnd,zEnd].forEach(end=>{
+    miCtx.beginPath();miCtx.moveTo(...origin);miCtx.lineTo(...end);miCtx.stroke();
+  });
+  miCtx.fillStyle='#555';miCtx.font='bold 11px sans-serif';miCtx.textAlign='center';
+  miCtx.fillText('a',xEnd[0]+10,xEnd[1]+5);
+  miCtx.fillText('b',yEnd[0]-12,yEnd[1]+5);
+  miCtx.fillText('c',zEnd[0]+8,zEnd[1]-5);
+  document.getElementById('millerCaption').textContent='Plane '+plane+': '+millerInfo[plane].desc;
+}
+function iso3D(x,y,z,s,cx,cy){
+  return [cx+s*(x-y)*Math.cos(Math.PI/6),cy+s*(x+y)*Math.sin(Math.PI/6)-s*z];
+}
+function drawMillerPlane(ctx,h,k,l,s,cx,cy,rows,cols){
+  // intercepts
+  const xi=h?1/h:999,yi=k?1/k:999,zi=l?1/l:999;
+  // scale to fit grid
+  const scale=Math.min(h?cols/h:cols,k?rows/k:rows,l?2/l:2);
+  const xa=h?scale/h:0,ya=k?scale/k:0,za=l?scale/l:0;
+  const p0=h?iso3D(xa,0,0,s,cx,cy):iso3D(0,ya,0,s,cx,cy);
+  const p1=k?iso3D(0,ya,0,s,cx,cy):(h?iso3D(xa,0,0,s,cx,cy):iso3D(0,0,za,s,cx,cy));
+  const p2=l?iso3D(0,0,za,s,cx,cy):(k?iso3D(xa,0,0,s,cx,cy):iso3D(xa,ya,0,s,cx,cy));
+  // for planes with 0 index, extend corners
+  let corners=[];
+  if(!h&&!k){corners=[iso3D(0,0,za,s,cx,cy),iso3D(cols,0,za,s,cx,cy),iso3D(cols,rows,za,s,cx,cy),iso3D(0,rows,za,s,cx,cy)];}
+  else if(!h){corners=[iso3D(0,ya,0,s,cx,cy),iso3D(cols,ya,0,s,cx,cy),iso3D(cols,0,za||0,s,cx,cy),iso3D(0,0,za||0,s,cx,cy)];}
+  else if(!k){corners=[iso3D(xa,0,0,s,cx,cy),iso3D(0,0,0,s,cx,cy),iso3D(0,0,za||0,s,cx,cy),iso3D(xa,0,za||0,s,cx,cy)];}
+  else if(!l){corners=[iso3D(xa,0,0,s,cx,cy),iso3D(0,ya,0,s,cx,cy),iso3D(0,rows,0,s,cx,cy),iso3D(cols,0,0,s,cx,cy)];}
+  else{corners=[p0,p1,p2];}
+  ctx.beginPath();ctx.moveTo(...corners[0]);
+  corners.slice(1).forEach(p=>ctx.lineTo(...p));
+  ctx.closePath();
+  ctx.fillStyle='rgba(13,115,119,0.25)';ctx.fill();
+  ctx.strokeStyle='#0d7377';ctx.lineWidth=2;ctx.stroke();
+  // Label
+  ctx.fillStyle='#0d7377';ctx.font='bold 14px Space Grotesk,sans-serif';ctx.textAlign='center';
+  const avgX=corners.reduce((a,p)=>a+p[0],0)/corners.length;
+  const avgY=corners.reduce((a,p)=>a+p[1],0)/corners.length;
+  ctx.fillText('('+h+k+l+')',avgX,avgY);
+}
+drawMiller('100');
+
+// ── CLOSE PACKING ──
+const pkC=document.getElementById('packingCanvas');
+const pkCtx=pkC.getContext('2d');
+const packCaptions={
+  1:'Layer A — single hexagonal close-packed layer. Atoms touch. Trigonal holes visible between groups of 3.',
+  2:'Layers A + B — second layer (blue) sits in hollows of layer A. Tetrahedral (T) and octahedral (O) holes form.',
+  3:'HCP: A–B–A stacking. Third layer (green) identical to A, covers tetrahedral holes. Repeats ABAB… Packing: 74%.',
+  4:'FCC/CCP: A–B–C stacking. Third layer (orange) in different hollows, NOT same as A. Repeats ABCABC… Packing: 74%.'
+};
+function showPacking(layers){
+  const W=pkC.width,H=pkC.height;
+  pkCtx.clearRect(0,0,W,H);
+  const r=22,sp=r*2,cx=W/2,cy=H/2;
+  const cols=12,rows=3;
+  const layerColors={A:'#0d7377',B:'#2a6db5',C:'#c9871e'};
+  function drawLayer(label,color,yOff,xShift){
+    for(let row=0;row<rows;row++){
+      for(let col=0;col<cols;col++){
+        const x=cx+(col-cols/2)*sp+(row%2)*sp*0.5+xShift;
+        const y=cy+(row-rows/2)*sp*0.866+yOff;
+        pkCtx.beginPath();pkCtx.arc(x,y,r-1,0,Math.PI*2);
+        pkCtx.fillStyle=color+'dd';pkCtx.fill();
+        pkCtx.strokeStyle='rgba(255,255,255,.4)';pkCtx.lineWidth=1;pkCtx.stroke();
+        if(row===1&&col===cols/2){
+          pkCtx.fillStyle='white';pkCtx.font='bold 11px sans-serif';pkCtx.textAlign='center';pkCtx.textBaseline='middle';
+          pkCtx.fillText(label,x,y);
+        }
+      }
+    }
+  }
+  drawLayer('A',layerColors.A,50,0);
+  if(layers>=2)drawLayer('B',layerColors.B,-20,sp*0.5);
+  if(layers>=3){const lbl=layers===3?'A':'C',col=layers===3?layerColors.A:layerColors.C;drawLayer(lbl,col,-90,layers===3?0:sp);}
+  // Caption
+  pkCtx.fillStyle='#555';pkCtx.font='11px Space Grotesk,sans-serif';pkCtx.textAlign='center';
+  const words=packCaptions[layers];
+  pkCtx.fillText(words.substring(0,80)+'...',W/2,H-8);
+  document.getElementById('packingCaption').textContent=packCaptions[layers];
+}
+showPacking(1);
+</script>
+</body>
+</html>
